@@ -27,21 +27,21 @@
       blocks: [
         {
           type: 'lead',
-          text: 'CSS entwickelt sich in einzelnen Modulen; eine jährliche Gesamtversion gibt es nicht. Wir ordnen die Auswahl nach dem Jahr der browserübergreifenden Verfügbarkeit.'
+          text: 'CSS wird in einzelnen Modulen weiterentwickelt, eine jährliche Gesamtversion gibt es nicht. Wir sortieren deshalb danach, in welchem Jahr ein Feature in allen großen Browsern angekommen ist.'
         },
         {
           type: 'table',
           head: ['Baseline-Jahr', 'Relevante Features', 'Demo'],
           rows: [
-            ['2023', '`:has()` seit Dezember; Nesting; Container Size Queries; Subgrid; moderne Farbräume und `color-mix()`', '`:has()`'],
+            ['2023', '`:has()` (ab Dezember); Nesting; Container Size Queries; Subgrid; moderne Farbräume und `color-mix()`', '`:has()`'],
             ['2024', '`text-wrap: balance`; `light-dark()`; relative Farben; `@starting-style`; `transition-behavior`; `@property`; `backdrop-filter`; `scrollbar-gutter`', 'Text und Farben'],
-            ['2025', 'View Transitions; `view-transition-class`; `::details-content`; `content-visibility`; Popover als benachbarte HTML-API', 'View Transitions'],
+            ['2025', 'View Transitions; `view-transition-class`; `::details-content`; `content-visibility`; Popover (eigentlich eine HTML-API)', 'View Transitions'],
             ['2026', '`@scope`; Container Style Queries; `field-sizing`; `contrast-color()`; `shape()`; `:open`; `sibling-index()`; `sibling-count()`; `progress()`', 'Positionsfunktionen und Berechnungen']
           ]
         },
         {
           type: 'callout',
-          text: 'Container Size Queries, Subgrid, moderne Farben und ursprüngliches Nesting waren bereits vor Oktober 2023 browserübergreifend verfügbar – ergänzende Grundlagen. Size Queries reagieren auf Containermaße, Style Queries auf Stilwerte; beide haben unterschiedliche Supportstände.'
+          text: 'Container Size Queries, Subgrid, moderne Farben und die erste Form von Nesting gab es schon vor Oktober 2023 in allen großen Browsern. Wir zeigen sie als Grundlagen. Achtung: Size Queries fragen die Größe eines Containers ab, Style Queries seine Stilwerte. Die beiden werden unterschiedlich gut unterstützt.'
         }
       ],
       sources: [
@@ -53,29 +53,29 @@
         { label: 'Baseline 2026', url: 'https://web.dev/baseline/2026' }
       ],
       notes: [
-        'Ziel: zeigen, was CSS heute ausdrücken kann. Ältere Grundlagen und Features mit eingeschränktem Support sind gekennzeichnet.',
-        'Ursprüngliche Übersicht am 5. Oktober 2026 recherchiert; Container-Einheiten, Positionsfunktionen, Counter, Fortschritt und eigene Funktionen am 26. Oktober 2026 ergänzt.',
-        'Die Unterlage ist ein Baukasten – alle Demos nacheinander würden die 15 Minuten sprengen. Mit **R** nur den Hauptablauf zeigen.'
+        'Ziel: zeigen, was mit CSS heute alles geht. Ältere Grundlagen und Features mit eingeschränktem Support sind gekennzeichnet.',
+        'Die Übersicht stammt vom 5. Oktober 2026. Container-Einheiten, Positionsfunktionen, Counter, Fortschritt und eigene Funktionen kamen am 26. Oktober 2026 dazu.',
+        'Die Folien sind ein Baukasten. Alle Demos zusammen passen nicht in 15 Minuten, deshalb mit **R** nur den Hauptablauf zeigen.'
       ]
     },
 
     {
       id: 'css-has',
       topic: '`:has()`',
-      kicker: 'CSS · Demo 1 · Zustände ohne zusätzlichen Code',
-      title: 'Das Elternelement reagiert auf den Inhalt',
+      kicker: 'CSS · Demo 1 · Zustände ohne JavaScript',
+      title: 'Das Elternelement reagiert auf seinen Inhalt',
       status: 'neu',
       since: 'Baseline Dezember 2023',
       minutes: 2,
       blocks: [
         {
           type: 'lead',
-          text: '`:has()` wählt Elemente anhand passender verwandter Elemente aus. Für eine Aufgabenliste reicht CSS, um die Zeile eines ausgewählten Kontrollkästchens zu gestalten.'
+          text: 'Mit `:has()` wählt man ein Element danach aus, was in ihm steckt oder ihm folgt. In einer Aufgabenliste lässt sich so die Zeile mit angehakter Checkbox allein mit CSS hervorheben.'
         },
         {
           type: 'compare',
           before: {
-            label: 'Vorher: Klasse per change-Handler',
+            label: 'Vorher: Klasse per change-Handler setzen',
             blocks: [{
               type: 'demo', kind: 'web', height: 170,
               html: d`
@@ -125,9 +125,9 @@
         { label: 'CSS Selectors Level 4: Relational Pseudo-class', url: 'https://drafts.csswg.org/selectors/#relational' }
       ],
       notes: [
-        'Checkbox anklicken. Rechts gibt es keine Zeile JavaScript.',
-        'Die Regel im Editor auskommentieren oder den Selektor ändern, etwa auf `:has(input:not(:checked))`.',
-        'CSS steuert hier die Darstellung; gespeicherter Aufgabenstatus bleibt Aufgabe der Anwendungslogik.'
+        'Checkbox anklicken. Rechts steckt keine einzige Zeile JavaScript dahinter.',
+        'Im Editor die Regel auskommentieren oder den Selektor ändern, etwa in `:has(input:not(:checked))`.',
+        'CSS kümmert sich hier nur um die Darstellung. Den Status zu speichern bleibt Sache der Anwendung.'
       ]
     },
 
@@ -135,7 +135,7 @@
       id: 'css-text-wrap',
       topic: '`text-wrap: balance`',
       kicker: 'CSS · Zusatzbeispiel · Text',
-      title: 'Überschriften gleichmäßiger umbrechen',
+      title: 'Überschriften gleichmäßig umbrechen',
       status: 'neu',
       role: 'zusatz',
       since: 'Baseline 2024',
@@ -143,7 +143,7 @@
       blocks: [
         {
           type: 'lead',
-          text: '`text-wrap: balance` verteilt kurze Textblöcke auf ausgeglichenere Zeilen. Statt manueller `<br>`-Tags bleibt die Überschrift bei unterschiedlichen Breiten flexibel.'
+          text: '`text-wrap: balance` verteilt kurze Texte auf etwa gleich lange Zeilen. Anders als mit `<br>` von Hand passt sich die Überschrift dabei jeder Breite an.'
         },
         {
           type: 'demo', kind: 'web', height: 330,
@@ -169,15 +169,15 @@
         }
       ],
       support: {
-        text: 'Baseline 2024. Algorithmus und Zahl ausbalancierter Zeilen sind browserabhängig.',
+        text: 'Baseline 2024. Wie genau ausbalanciert wird und für wie viele Zeilen, entscheidet jeder Browser selbst.',
         test: () => CSS.supports('text-wrap', 'balance')
       },
       sources: [
         { label: 'CSS Text Level 4: text-wrap-style', url: 'https://drafts.csswg.org/css-text-4/#text-wrap-style' }
       ],
       notes: [
-        'Grau: normaler Umbruch, schwarz: `balance`. Breite des Rahmens ändern.',
-        'Für kurze Überschriften verwenden. Es ist keine feste Kontrolle über einzelne Umbruchstellen.'
+        'Grau ist der normale Umbruch, schwarz der mit `balance`. Dann den Rahmen breiter und schmaler ziehen.',
+        'Gedacht für kurze Überschriften. Wo genau umbrochen wird, lässt sich damit nicht festlegen.'
       ]
     },
 
@@ -193,12 +193,12 @@
       blocks: [
         {
           type: 'lead',
-          text: '`light-dark()` wählt einen Farbwert passend zum verwendeten Farbschema. Farbpaare stehen direkt am Einsatzort. Voraussetzung ist `color-scheme`.'
+          text: '`light-dark()` nimmt je nach aktivem Farbschema den hellen oder den dunklen Wert. Beide Farben stehen direkt nebeneinander an der Stelle, an der sie gebraucht werden. Damit das funktioniert, muss `color-scheme` gesetzt sein.'
         },
         {
           type: 'compare',
           before: {
-            label: 'Vorher: Überschreiben per Media Query',
+            label: 'Vorher: per Media Query überschreiben',
             blocks: [{
               type: 'code', lang: 'css', code: d`
                 body { background: #f8fafc; color: #0f172a; }
@@ -243,15 +243,15 @@
         }
       ],
       support: {
-        text: 'Baseline 2024. Kontrast und Lesbarkeit der gewählten Farben weiterhin selbst prüfen.',
+        text: 'Baseline 2024. Ob Kontrast und Lesbarkeit stimmen, müssen wir weiterhin selbst prüfen.',
         test: () => CSS.supports('color', 'light-dark(white, black)')
       },
       sources: [
         { label: 'CSS Color Level 5: light-dark()', url: 'https://drafts.csswg.org/css-color-5/#light-dark' }
       ],
       notes: [
-        'Zwischen Hell und Dunkel wechseln. Ohne Attribut folgt die Seite der Systemeinstellung.',
-        'Diese Präsentation nutzt für ihr eigenes Farbschema die klassische Variante mit Media Query – Taste **T**.'
+        'Zwischen Hell und Dunkel umschalten. Bei „System“ richtet sich die Seite nach der Einstellung des Betriebssystems.',
+        'Diese Präsentation selbst macht es noch klassisch mit Media Query (umschalten mit **T**).'
       ]
     },
 
@@ -259,7 +259,7 @@
       id: 'css-view-transitions',
       topic: '`document.startViewTransition()`',
       kicker: 'CSS · Zusatzbeispiel · Übergänge',
-      title: 'Zwischen zwei Ansichten animieren',
+      title: 'Animierter Wechsel zwischen zwei Ansichten',
       status: 'neu',
       role: 'zusatz',
       since: 'Baseline 2025 (same-document)',
@@ -267,7 +267,7 @@
       blocks: [
         {
           type: 'lead',
-          text: '„Same-document“ heißt: Es gibt keinen echten Seitenwechsel. Eine Single-Page-App tauscht per JavaScript den Inhalt aus – etwa von der Liste zur Detailansicht. View Transitions animieren genau diesen Austausch.'
+          text: '„Same-document“ heißt: Die Seite wird nicht neu geladen. Eine Single-Page-App tauscht per JavaScript nur den Inhalt aus, etwa von der Liste zur Detailansicht. View Transitions animieren genau diesen Wechsel.'
         },
         {
           type: 'columns',
@@ -277,18 +277,18 @@
                 type: 'list',
                 ordered: true,
                 items: [
-                  '**Vorher:** Der Browser hält ein Bild der alten Ansicht fest.',
-                  '**Update:** Im Callback von `startViewTransition()` tauscht unser Code den DOM aus.',
-                  '**Nachher:** Der Browser blendet von alt nach neu über.',
-                  'Elemente mit **gleichem** `view-transition-name` in alter und neuer Ansicht gelten als dasselbe Element und wandern von ihrer alten an die neue Position.'
+                  '**Vorher:** Der Browser macht ein Bild der alten Ansicht.',
+                  '**Update:** Im Callback von `startViewTransition()` ändert unser Code das DOM.',
+                  '**Nachher:** Der Browser blendet von der alten zur neuen Ansicht über.',
+                  'Haben Elemente in alter und neuer Ansicht **denselben** `view-transition-name`, behandelt der Browser sie als ein Element und lässt es von der alten an die neue Position wandern.'
                 ]
               }
             ],
             [
               {
                 type: 'callout',
-                title: 'Abgrenzung',
-                text: 'Echte Seitenwechsel zwischen zwei HTML-Dokumenten (Multi-Page-App) sind **cross-document** View Transitions. Sie werden per CSS mit `@view-transition` aktiviert und haben einen eigenen Supportstand.'
+                title: 'Nicht verwechseln',
+                text: 'Für echte Seitenwechsel zwischen zwei HTML-Dokumenten (Multi-Page-App) gibt es **cross-document** View Transitions. Die schaltet man per CSS mit `@view-transition` ein, und sie werden anders unterstützt.'
               }
             ]
           ]
@@ -390,19 +390,19 @@
         }
       ],
       support: {
-        text: 'Basisfunktion Baseline 2025. Einzelne Erweiterungen und Übergänge zwischen Dokumenten gesondert prüfen.',
+        text: 'Grundfunktion Baseline 2025. Erweiterungen und Übergänge zwischen Dokumenten jeweils einzeln prüfen.',
         test: () => 'startViewTransition' in document
       },
       sources: [
         { label: 'Chrome: Same-document View Transitions', url: 'https://developer.chrome.com/docs/web-platform/view-transitions/same-document' }
       ],
       notes: [
-        'Erst mit „View Transition verwenden“ aus ein Ticket öffnen: Die Ansicht springt hart um. Dann mit Übergang: Die Karte wandert in den Detailkopf, der Rest blendet über.',
-        '„Zeitlupe“ einschalten, um die drei Schritte sichtbar zu machen: altes Bild, DOM-Austausch, Animation.',
-        'Wichtig: Es ist immer dasselbe Dokument. Der Inhalt von `#app` wird ausgetauscht – so wie bei einem Routenwechsel in einer Single-Page-App.',
-        'Für echte Seitenwechsel zwischen HTML-Dokumenten gibt es cross-document View Transitions mit `@view-transition` – eigener Supportstand.',
-        'DOM-Aktualisierungen bleiben JavaScript. Bei reduzierter Bewegung wird der Übergang übersprungen.',
-        'Diese Präsentation nutzt View Transitions selbst beim Folienwechsel.'
+        'Erst „View Transition verwenden“ ausschalten und ein Ticket öffnen: Die Ansicht springt hart um. Dann mit Übergang: Die Karte wandert nach oben in den Kopf der Detailansicht, der Rest blendet über.',
+        'Mit „Zeitlupe“ sieht man die drei Schritte: altes Bild, DOM-Austausch, Animation.',
+        'Wichtig: Wir bleiben die ganze Zeit im selben Dokument. Nur der Inhalt von `#app` wird ausgetauscht, wie bei einem Routenwechsel in einer Single-Page-App.',
+        'Für echte Seitenwechsel zwischen HTML-Dokumenten gibt es cross-document View Transitions mit `@view-transition`. Deren Support ist ein anderer.',
+        'Das DOM ändern wir weiterhin per JavaScript. Ist „Bewegung reduzieren“ eingeschaltet, entfällt der Übergang.',
+        'Die Präsentation selbst nutzt View Transitions beim Folienwechsel.'
       ]
     },
 
@@ -417,7 +417,7 @@
       blocks: [
         {
           type: 'lead',
-          text: 'Die Komponente reagiert auf ihren umgebenden Container, nicht auf den Viewport – etwa in einer schmalen Sidebar und in einer breiten Hauptspalte.'
+          text: 'Die Komponente richtet sich nach dem Platz in ihrem Container, nicht nach dem Viewport. So sieht sie in einer schmalen Sidebar anders aus als in einer breiten Hauptspalte.'
         },
         {
           type: 'demo', kind: 'web', height: 340,
@@ -443,31 +443,31 @@
         }
       ],
       support: {
-        text: 'Size Queries sind seit 2023 browserübergreifend verfügbar. Style Queries sind ein eigenes Feature mit anderem Supportstand.',
+        text: 'Size Queries gibt es seit 2023 in allen großen Browsern. Style Queries sind ein eigenes Feature und werden anders unterstützt.',
         test: () => CSS.supports('container-type', 'inline-size')
       },
       sources: [
         { label: 'CSS Conditional Rules Level 5: Container Queries', url: 'https://drafts.csswg.org/css-conditional-5/#container-queries' }
       ],
       notes: [
-        'Zwei Slots mit unterschiedlicher Breite. Den oberen Slot an der Ecke breiter ziehen: Ab 30rem wechselt das Layout.',
-        'Der Query-Container muss ein Vorfahr der gestylten Karte sein.',
-        'Dieses Beispiel betrifft Maße und verwendet keine Style Query.'
+        'Zwei Slots mit unterschiedlicher Breite. Den oberen an der Ecke breiter ziehen: Ab 30rem wechselt das Layout.',
+        'Der Container muss ein Vorfahr der Karte sein, die gestylt wird.',
+        'Hier geht es nur um Größen, eine Style Query kommt nicht vor.'
       ]
     },
 
     {
       id: 'css-container-units',
       topic: '`cqi` · `cqw` · `cqh`',
-      kicker: 'CSS · Demo 2 · Containergrößen in Werten',
-      title: 'Schrift und Abstände mit dem Container skalieren',
+      kicker: 'CSS · Demo 2 · Größen relativ zum Container',
+      title: 'Schrift und Abstände wachsen mit dem Container',
       status: 'grundlage',
       since: 'Vor Oktober 2023',
       minutes: 2,
       blocks: [
         {
           type: 'lead',
-          text: 'Container-Einheiten ergänzen Container Queries: Statt nur einen Breakpoint abzufragen, hängt eine Größe fließend vom Query-Container ab.'
+          text: 'Container-Einheiten ergänzen Container Queries: Statt an einem Breakpoint umzuschalten, wächst und schrumpft ein Wert stufenlos mit dem Container.'
         },
         {
           type: 'columns',
@@ -479,10 +479,10 @@
                 rows: [
                   ['`cqw`', '1 % der Breite'],
                   ['`cqh`', '1 % der Höhe'],
-                  ['`cqi`', '1 % der Inline-Größe'],
-                  ['`cqb`', '1 % der Block-Größe'],
-                  ['`cqmin`', 'Kleinerer Wert von `cqi` und `cqb`'],
-                  ['`cqmax`', 'Größerer Wert von `cqi` und `cqb`']
+                  ['`cqi`', '1 % der Inline-Größe (meist Breite)'],
+                  ['`cqb`', '1 % der Block-Größe (meist Höhe)'],
+                  ['`cqmin`', 'Der kleinere Wert von `cqi` und `cqb`'],
+                  ['`cqmax`', 'Der größere Wert von `cqi` und `cqb`']
                 ]
               }
             ],
@@ -490,7 +490,7 @@
               {
                 type: 'callout',
                 tone: 'warn',
-                text: 'Der Vorfahr muss die abgefragte Achse als Query-Container bereitstellen. `inline-size` reicht nicht für jede Verwendung von `cqh` oder `cqb`. Fehlt ein Container für eine Achse, greift der kleine Viewport als Bezug.'
+                text: 'Ein Vorfahr muss für die jeweilige Richtung als Container definiert sein. Mit `inline-size` funktionieren `cqh` und `cqb` also nicht in jedem Fall. Gibt es für eine Richtung keinen Container, rechnet der Browser mit dem kleinen Viewport.'
               }
             ]
           ]
@@ -523,16 +523,16 @@
         }
       ],
       support: {
-        text: 'Container-Einheiten sind seit 2023 browserübergreifend verfügbar.',
+        text: 'Container-Einheiten gibt es seit 2023 in allen großen Browsern.',
         test: () => CSS.supports('width', '1cqi')
       },
       sources: [
         { label: 'CSS Conditional Rules Level 5: Container Relative Lengths', url: 'https://drafts.csswg.org/css-conditional-5/#container-lengths' }
       ],
       notes: [
-        'Zwei Container mit unterschiedlichen Breiten; der Viewport bleibt gleich. Einen Container an der Ecke ziehen.',
-        '`cqi` berücksichtigt die Schreibrichtung; in horizontalen Texten entspricht die Inline-Größe der Breite.',
-        'Containermaße sind nicht automatisch die Maße des direkten Elternelements.'
+        'Zwei Container mit unterschiedlicher Breite bei gleichem Viewport. Einen davon an der Ecke breiter oder schmaler ziehen.',
+        '`cqi` richtet sich nach der Schreibrichtung. Bei horizontalem Text ist die Inline-Größe die Breite.',
+        'Der Container ist nicht automatisch das direkte Elternelement.'
       ]
     },
 
@@ -549,7 +549,7 @@
         {
           type: 'compare',
           before: {
-            label: 'Frühere getrennte Selektoren',
+            label: 'Früher: Selektoren getrennt schreiben',
             blocks: [{
               type: 'demo', kind: 'web', height: 120,
               html: '<div class="card">Mit der Maus darüberfahren</div>',
@@ -575,38 +575,38 @@
         },
         {
           type: 'callout',
-          text: 'Nesting bietet keine vollständige Sass-Sprache. Sass-Funktionen oder Mixins werden dadurch nicht automatisch ersetzt. Eigene native Funktionen sind mit `@function` separat möglich, bisher mit eingeschränktem Support.'
+          text: 'Nesting allein macht CSS nicht zu Sass. Funktionen und Mixins aus Sass gibt es damit noch nicht. Eigene Funktionen kann man mit `@function` schreiben, das wird aber bisher nur teilweise unterstützt.'
         }
       ],
       support: {
-        text: 'Ältere Grundlage aus 2023.',
+        text: 'Älteres Feature aus 2023.',
         test: () => CSS.supports('selector(&)')
       },
       sources: [
         { label: 'CSS Nesting Module Level 1', url: 'https://drafts.csswg.org/css-nesting-1/' }
       ],
       notes: [
-        'Nur bei Rückfragen zu Sass zeigen.'
+        'Nur zeigen, wenn jemand nach Sass fragt.'
       ]
     },
 
     {
       id: 'css-sibling-index',
       topic: '`sibling-index()` · `sibling-count()`',
-      kicker: 'CSS · Demo 3 · Wiederholungen',
-      title: 'Gestaffelte Animationen mit Positionsfunktionen',
+      kicker: 'CSS · Demo 3 · Ohne Wiederholung',
+      title: 'Animationen nacheinander starten mit `sibling-index()`',
       status: 'neu',
       since: 'Baseline Newly available seit August 2026',
       minutes: 2,
       blocks: [
         {
           type: 'lead',
-          text: 'CSS hat keine `for`-Schleife wie Sass. `sibling-index()` und `sibling-count()` erlauben aber Berechnungen anhand der Position eines Elements und der Anzahl seiner Geschwister. Der Index beginnt bei 1.'
+          text: 'Eine `for`-Schleife wie in Sass gibt es in CSS nicht. Mit `sibling-index()` und `sibling-count()` kann man aber mit der Position eines Elements und der Zahl seiner Geschwister rechnen. Gezählt wird ab 1.'
         },
         {
           type: 'compare',
           before: {
-            label: 'Vorher: eine Regel je Position',
+            label: 'Vorher: eine Regel pro Position',
             blocks: [{
               type: 'code', lang: 'css', code: d`
                 /* Oder per Sass-Schleife generiert */
@@ -648,11 +648,11 @@
         },
         {
           type: 'callout',
-          text: 'Gezählt werden alle Geschwisterelemente, nicht nur die, die `.stagger > li` treffen. Ein zusätzliches anderes Element verschiebt die Indizes. Die Funktionen erzeugen keine neuen DOM-Elemente.'
+          text: 'Mitgezählt werden alle Geschwister, nicht nur die, auf die `.stagger > li` passt. Steht ein anderes Element dazwischen, verschieben sich die Indizes. Neue Elemente im DOM erzeugen die Funktionen nicht.'
         }
       ],
       support: {
-        text: 'Laut WebDX seit August 2026 Baseline Newly available. Ältere Browser zeigen die Liste direkt ohne Animation.',
+        text: 'Laut WebDX seit August 2026 Baseline Newly available. Ältere Browser zeigen die Liste einfach ohne Animation.',
         test: () => CSS.supports('animation-delay', 'calc(sibling-index() * 1ms)')
       },
       sources: [
@@ -660,9 +660,9 @@
         { label: 'WebDX: sibling-count', url: 'https://web-platform-dx.github.io/web-features-explorer/features/sibling-count/' }
       ],
       notes: [
-        'Im HTML ein viertes `<li>HTML</li>` ergänzen. Die Demo startet neu, das neue Element erhält automatisch eine Verzögerung.',
-        'Ergänzung: `calc(sibling-index() / sibling-count())` liefert einen Wert relativ zur Gesamtzahl.',
-        'Ist im System „Bewegung reduzieren“ aktiv, bleibt die Animation bewusst aus.'
+        'Im HTML ein viertes `<li>HTML</li>` ergänzen. Die Demo startet neu, und das neue Element bekommt automatisch seine Verzögerung.',
+        'Noch ein Trick: `calc(sibling-index() / sibling-count())` ergibt die Position als Anteil an der Gesamtzahl.',
+        'Ist im System „Bewegung reduzieren“ eingeschaltet, gibt es absichtlich keine Animation.'
       ]
     },
 
@@ -677,7 +677,7 @@
       blocks: [
         {
           type: 'lead',
-          text: 'CSS-Counter sind ein kurzer Grundlagen-Einschub. `counter()` liefert Text für die Darstellung; `sibling-index()` liefert eine Zahl für Berechnungen.'
+          text: 'Ein kurzer Abstecher zu einem alten Bekannten: `counter()` liefert Text, der angezeigt wird. `sibling-index()` dagegen liefert eine Zahl, mit der man rechnen kann.'
         },
         {
           type: 'demo', kind: 'web', height: 240,
@@ -697,7 +697,7 @@
         },
         {
           type: 'callout',
-          text: 'Für gewöhnliche nummerierte Listen bleibt `<ol>` die passende HTML-Struktur. Generierter Inhalt sollte nicht die einzige Quelle fachlich notwendiger Informationen sein.'
+          text: 'Für normale nummerierte Listen ist `<ol>` weiterhin das richtige Element. Wichtige Informationen sollten nicht nur in per CSS erzeugtem Inhalt stehen.'
         }
       ],
       support: {
@@ -708,22 +708,22 @@
         { label: 'CSS Lists and Counters Level 3', url: 'https://drafts.csswg.org/css-lists-3/#auto-numbering' }
       ],
       notes: [
-        'Eine Überschrift dazwischen einfügen, etwa `<h2>Voraussetzungen</h2>`. Die Nummerierung passt sich an.'
+        'Eine weitere Überschrift einfügen, etwa `<h2>Voraussetzungen</h2>`. Die Nummern passen sich an.'
       ]
     },
 
     {
       id: 'css-progress',
       topic: '`progress()`',
-      kicker: 'CSS · Demo 5 · Fortschritt berechnen',
-      title: 'Einen Wert mit `progress()` normieren',
+      kicker: 'CSS · Demo 5 · Mit Anteilen rechnen',
+      title: 'Mit `progress()` einen Anteil ausrechnen',
       status: 'neu',
       since: 'Baseline 2026',
       minutes: 1,
       blocks: [
         {
           type: 'lead',
-          text: '`progress()` berechnet die relative Position eines Werts zwischen zwei Grenzen: `progress(75, 0, 100)` ergibt `0.75`. Die Grundform begrenzt auf 0 bis 1. Einen Lade- oder Scrollzustand ermittelt die Funktion nicht.'
+          text: '`progress()` rechnet aus, wo ein Wert zwischen zwei Grenzen liegt: `progress(75, 0, 100)` ergibt `0.75`. In der Grundform bleibt das Ergebnis zwischen 0 und 1. Wie weit etwas geladen oder gescrollt ist, weiß die Funktion nicht.'
         },
         {
           type: 'demo', kind: 'web', height: 210,
@@ -762,31 +762,31 @@
         }
       ],
       support: {
-        text: 'Laut Baseline-Übersicht 2026. Ohne Unterstützung bleibt die Grunddarstellung mit 75 %.',
+        text: 'Baseline 2026. Kennt der Browser die Funktion nicht, bleibt der Balken bei 75 %.',
         test: () => CSS.supports('opacity', 'progress(1, 0, 2)')
       },
       sources: [
         { label: 'CSS Values Level 5: Progress Notation', url: 'https://drafts.csswg.org/css-values-5/#progress' }
       ],
       notes: [
-        'Den Regler bewegen, auch über 100: Der Balken bleibt bei 100 %, weil die Grundform begrenzt.',
-        'Interessant vor allem bei anderen Grenzen als 0 und 100, etwa einer Messgröße zwischen 20 und 80 – im CSS ausprobieren.',
-        'Für echten Aufgabenfortschritt ist das native `<progress>`-Element häufig die einfachere Lösung.'
+        'Den Regler auch über 100 schieben: Der Balken bleibt bei 100 % stehen, weil das Ergebnis nicht über 1 geht.',
+        'Spannend wird es mit anderen Grenzen als 0 und 100, etwa einem Messwert zwischen 20 und 80. Im CSS ausprobieren.',
+        'Für einen echten Fortschrittsbalken ist das `<progress>`-Element meist die einfachere Wahl.'
       ]
     },
 
     {
       id: 'css-scroll-timeline',
       topic: '`animation-timeline: scroll()`',
-      kicker: 'CSS · Demo 6 · Fortschritt darstellen',
-      title: 'Scrollfortschritt ohne eigenen Scroll-Handler',
+      kicker: 'CSS · Demo 6 · Scrollfortschritt',
+      title: 'Lesefortschritt ohne Scroll-Handler',
       status: 'eingeschraenkt',
       since: 'Scroll-driven Animations',
       minutes: 2,
       blocks: [
         {
           type: 'lead',
-          text: 'Mit einer Scroll-Timeline hängt der Animationsfortschritt an der Scrollposition. Anders als `progress()` erhält sie ihren Fortschritt direkt vom Scrollen.'
+          text: 'Mit einer Scroll-Timeline läuft eine Animation nicht nach Zeit ab, sondern folgt der Scrollposition. Anders als bei `progress()` muss man dafür nichts ausrechnen.'
         },
         {
           type: 'compare',
@@ -839,19 +839,19 @@
         },
         {
           type: 'callout',
-          text: '`animation-timeline` steht nach dem `animation`-Shorthand, weil dieser die Timeline zurücksetzt. Ohne Unterstützung erscheint keine Leiste. Für bewegte Einblendeffekte die Präferenz für reduzierte Bewegung berücksichtigen.'
+          text: '`animation-timeline` muss nach `animation` stehen, weil die Kurzschreibweise die Timeline sonst wieder zurücksetzt. Ohne Browserunterstützung erscheint einfach keine Leiste. Bei Einblendeffekten an „Bewegung reduzieren“ denken.'
         }
       ],
       support: {
-        text: 'Support im Zielbrowser vorab prüfen; Stand am Vorführungstag erneut kontrollieren.',
+        text: 'Vorher prüfen, ob der Zielbrowser das kann, und am Tag der Vorführung noch einmal nachsehen.',
         test: () => CSS.supports('animation-timeline', 'scroll()')
       },
       sources: [
         { label: 'WebKit: A Guide to Scroll-driven Animations', url: 'https://webkit.org/blog/17101/a-guide-to-scroll-driven-animations-with-just-css/' }
       ],
       notes: [
-        'Im Ergebnisfenster hoch- und herunterscrollen: Die Leiste oben folgt der Scrollposition.',
-        'Zusammen mit `progress()` zeigen: berechneter Wert und Scrollposition als zwei unterschiedliche Fortschrittsquellen.'
+        'Im Ergebnis hoch- und runterscrollen: Die Leiste oben wächst und schrumpft mit.',
+        'Gut im Doppel mit `progress()`: einmal kommt der Fortschritt aus einer Rechnung, einmal aus der Scrollposition.'
       ]
     },
 
@@ -859,14 +859,14 @@
       id: 'css-function',
       topic: '`@function`',
       kicker: 'CSS · Demo 7 · Ausblick',
-      title: 'Wiederverwendbare Berechnungen mit `@function`',
+      title: 'Eigene CSS-Funktionen mit `@function`',
       status: 'experimentell',
       since: 'Chrome und Edge seit 139',
       minutes: 2,
       blocks: [
         {
           type: 'lead',
-          text: 'Mit `@function` lassen sich eigene Funktionen definieren, die Parameter annehmen und einen CSS-Wert liefern. Die Namen beginnen mit `--`. Das Beispiel bündelt die Berechnung eines Abstandssystems.'
+          text: 'Mit `@function` schreibt man eigene Funktionen, die Parameter bekommen und einen CSS-Wert zurückgeben. Ihre Namen beginnen mit `--`. Im Beispiel steckt die Rechnung für ein Abstandsraster in einer Funktion.'
         },
         {
           type: 'demo', kind: 'web', height: 230,
@@ -918,12 +918,12 @@
         {
           type: 'callout',
           tone: 'exp',
-          title: 'Kein automatischer Fallback',
-          text: 'Eine unbekannte Funktion kann eine Deklaration erst bei der Wertberechnung ungültig machen. Deshalb die Klasse nur nach geprüftem Support aktivieren. `@supports (--x: 1)` beweist keine Unterstützung von `@function`.'
+          title: 'Kein Fallback von selbst',
+          text: 'Kennt der Browser die Funktion nicht, merkt er das erst beim Berechnen des Werts, und die Deklaration fällt weg. Die Klasse deshalb erst setzen, wenn der Support geprüft ist. `@supports (--x: 1)` taugt dafür nicht, das ist auch ohne `@function` wahr.'
         }
       ],
       support: {
-        text: 'Stand 26. Oktober 2026: Chrome und Edge seit 139; Firefox und Safari noch nicht. Die Spezifikation ist ein Entwurf – ausdrücklich ein Ausblick.',
+        text: 'Stand 26. Oktober 2026: Chrome und Edge seit Version 139, Firefox und Safari noch nicht. Die Spezifikation ist noch ein Entwurf, das hier ist also ein Blick nach vorn.',
         test: supportsCssFunction
       },
       sources: [
@@ -931,16 +931,16 @@
         { label: 'WebDX: function', url: 'https://web-platform-dx.github.io/web-features-explorer/features/function/' }
       ],
       notes: [
-        'In einem unterstützten Browser den Faktor ändern, etwa `--spacing(8)`. Die Konsole zeigt den berechneten Wert.',
-        'In der Funktion lassen sich auch Bedingungen wie `@media` verwenden.',
-        'Eine Funktion liefert einen Wert; ganze Deklarationsblöcke wiederzuverwenden ist ein eigenes Mixin-Thema.'
+        'In einem Browser, der `@function` kann, den Faktor ändern, etwa auf `--spacing(8)`. Die Konsole zeigt das Ergebnis.',
+        'In einer Funktion darf auch `@media` stehen, das Ergebnis kann also von Bedingungen abhängen.',
+        'Eine Funktion liefert genau einen Wert. Ganze Blöcke von Deklarationen wiederverwenden, das wäre ein Mixin, und das ist ein anderes Thema.'
       ]
     },
 
     {
       id: 'css-support',
       kicker: 'CSS · Support und Ablauf',
-      title: 'Support prüfen und Auswahl treffen',
+      title: 'Support prüfen und Demos auswählen',
       role: 'einordnung',
       blocks: [
         {
@@ -961,23 +961,23 @@
           type: 'table',
           head: ['Dauer', 'Beispiel', 'Sichtbarer Effekt'],
           rows: [
-            ['2 Min.', '`:has()`', 'Zeile reagiert auf Checkbox'],
+            ['2 Min.', '`:has()`', 'Zeile reagiert auf die Checkbox'],
             ['3 Min.', 'Container Query und `cqi`', 'Layout und Schrift passen sich der Komponente an'],
-            ['2 Min.', '`sibling-index()`', 'Neue Elemente erhalten automatisch eine Verzögerung'],
-            ['1 Min.', 'Counter', 'Abschnittsnummern passen sich an'],
-            ['3 Min.', '`progress()` und Scroll-Timeline', 'Berechneter Wert und Scrollposition als zwei Fortschrittsquellen'],
-            ['2 Min.', '`@function`', 'Eigene parametrisierte Berechnung in CSS'],
-            ['2 Min.', 'Support und Fragen', 'Einordnung für die eigenen Zielbrowser']
+            ['2 Min.', '`sibling-index()`', 'Neue Elemente bekommen automatisch ihre Verzögerung'],
+            ['1 Min.', 'Counter', 'Abschnittsnummern zählen von selbst mit'],
+            ['3 Min.', '`progress()` und Scroll-Timeline', 'Fortschritt einmal berechnet, einmal aus der Scrollposition'],
+            ['2 Min.', '`@function`', 'Eigene Funktion mit Parameter in CSS'],
+            ['2 Min.', 'Support und Fragen', 'Was heißt das für unsere Zielbrowser?']
           ]
         },
         {
           type: 'p',
-          text: 'Bei älteren Zielbrowsern die Grunddarstellung erhalten und neuere Gestaltung gezielt ergänzen.'
+          text: 'Für ältere Zielbrowser eine funktionierende Grundversion behalten und neuere Gestaltung obendrauf setzen.'
         }
       ],
       notes: [
-        'Textumbrüche, Farbschemata, Nesting und View Transitions bleiben als zusätzliche Beispiele erhalten.',
-        'Supportstände am Vorführungstag erneut prüfen, insbesondere für `@function` und Scroll-Timelines.'
+        'Textumbruch, Farbschemata, Nesting und View Transitions sind als Zusatzbeispiele weiterhin dabei.',
+        'Am Tag der Vorführung den Support noch einmal prüfen, vor allem bei `@function` und Scroll-Timelines.'
       ]
     }
   ]);

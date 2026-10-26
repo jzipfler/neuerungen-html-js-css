@@ -2,7 +2,7 @@
   'use strict';
   const { add, d } = Deck;
 
-  const typeOnly = 'Typkonstrukt: wird beim Übersetzen entfernt, Browserunterstützung spielt keine Rolle. Editor- und Build-Werkzeuge müssen die Syntax verstehen.';
+  const typeOnly = 'Reine Typsyntax: Sie verschwindet beim Kompilieren, der Browser bekommt sie nie zu sehen. Editor und Build-Werkzeuge müssen sie aber verstehen.';
 
   add('ts', [
     {
@@ -14,28 +14,28 @@
       blocks: [
         {
           type: 'lead',
-          text: 'Die Auswahl beginnt mit TypeScript 5.3. Als ältere Grundlagen nehmen wir `satisfies` (4.9) und `const`-Typparameter (5.0) ausdrücklich in die Hauptdemos auf.'
+          text: 'Die Auswahl beginnt mit TypeScript 5.3. Zwei ältere Features nehmen wir bewusst trotzdem in die Hauptdemos auf: `satisfies` (4.9) und `const`-Typparameter (5.0).'
         },
         {
           type: 'table',
           head: ['Version', 'Ausgewählte Neuerungen', 'Demo'],
           rows: [
-            ['4.9 · 2022', '`satisfies` prüft die Typkompatibilität und erhält einen konkreten Ergebnistyp', 'Ja · ältere Grundlage'],
-            ['5.0 · 2023', '`const`-Typparameter verbessern die Inferenz von Literaltypen', 'Ja · ältere Grundlage'],
-            ['5.3 · 2023', 'Import Attributes; `switch (true)` Narrowing; präzisere Prüfungen von `super`', 'Reserve'],
-            ['5.4 · 2024', '`NoInfer`; Narrowing nach letzter Zuweisung in Closures; `groupBy`-Typen', 'Ja'],
-            ['5.5 · 2024', 'Abgeleitete Type Predicates; konstante Indexzugriffe; `isolatedDeclarations`', 'Ja'],
-            ['5.6 · 2024', 'Prüfung verdächtiger Bedingungen; Iterator-Helpers-Typen; `noCheck`', 'Ja'],
-            ['5.7 · 2024', 'Prüfung nie initialisierter Variablen; `rewriteRelativeImportExtensions`', 'Reserve'],
-            ['5.8 · 2025', 'Prüfung einzelner Return-Zweige; `erasableSyntaxOnly`; Node ESM', 'Reserve'],
+            ['4.9 · 2022', '`satisfies` prüft gegen einen Typ, ohne den konkreten Typ zu verlieren', 'Ja · ältere Grundlage'],
+            ['5.0 · 2023', '`const`-Typparameter: Literaltypen werden genauer abgeleitet', 'Ja · ältere Grundlage'],
+            ['5.3 · 2023', 'Import Attributes; Narrowing in `switch (true)`; genauere Prüfung von `super`', 'Reserve'],
+            ['5.4 · 2024', '`NoInfer`; Narrowing in Closures nach der letzten Zuweisung; Typen für `groupBy`', 'Ja'],
+            ['5.5 · 2024', 'Abgeleitete Type Predicates; Narrowing bei konstanten Indexzugriffen; `isolatedDeclarations`', 'Ja'],
+            ['5.6 · 2024', 'Warnung bei verdächtigen Bedingungen; Typen für Iterator Helpers; `noCheck`', 'Ja'],
+            ['5.7 · 2024', 'Fehler bei nie initialisierten Variablen; `rewriteRelativeImportExtensions`', 'Reserve'],
+            ['5.8 · 2025', 'Jeder Zweig eines `return` wird einzeln geprüft; `erasableSyntaxOnly`; Node ESM', 'Reserve'],
             ['5.9 · 2025', 'Neues `tsc --init`; `import defer`; `module node20`; erweiterbare Hovers', 'Reserve'],
-            ['6.0 · 2026', 'Inferenzverbesserungen; `es2025`; neue Defaults und Deprecations', 'Einordnung'],
+            ['6.0 · 2026', 'Bessere Inferenz; `es2025`; neue Standardwerte, veraltete Optionen', 'Einordnung'],
             ['7.0 · 2026', 'Nativer Compiler; Parallelisierung; neuer Language Server', 'Optional']
           ]
         },
         {
           type: 'callout',
-          text: 'Die Versionsangaben betreffen den Compiler. Ein neuer `lib`-Typ macht eine JavaScript-API noch nicht in der Laufzeit verfügbar.'
+          text: 'Die Versionen beziehen sich auf den Compiler. Nur weil es einen Typ in `lib` gibt, existiert die JavaScript-API zur Laufzeit noch lange nicht.'
         }
       ],
       sources: [
@@ -43,24 +43,24 @@
         { label: 'Microsoft TypeScript Blog', url: 'https://devblogs.microsoft.com/typescript/' }
       ],
       notes: [
-        'Auswahl, keine vollständige Liste aller Änderungen. Quellen geprüft am 5. Oktober 2026.',
-        'Stand der Quellen: 7.0 ist veröffentlicht, die Handbook-Navigation reicht bis 6.0. Für 7.0 verwenden wir die Release-Ankündigung.',
-        'TypeScript-Demos laufen über bearbeitbaren Code und Playground-Links mit fest gewählter Version.'
+        'Das ist eine Auswahl, nicht alles, was sich geändert hat. Quellen geprüft am 5. Oktober 2026.',
+        '7.0 ist zwar erschienen, das Handbook führt aber nur Release Notes bis 6.0. Für 7.0 stützen wir uns deshalb auf die Release-Ankündigung.',
+        'Die TypeScript-Demos bestehen aus bearbeitbarem Code und Links in den Playground mit fest eingestellter Version.'
       ]
     },
 
     {
       id: 'ts-satisfies',
       topic: '`satisfies`',
-      kicker: 'TypeScript · Demo 1 · Typen mit weniger Hilfscode',
-      title: '`satisfies` prüft eine Konfiguration',
+      kicker: 'TypeScript · Demo 1 · Genauere Typen',
+      title: 'Konfiguration prüfen mit `satisfies`',
       status: 'grundlage',
       since: 'TypeScript 4.9 · 2022',
       minutes: 3,
       blocks: [
         {
           type: 'lead',
-          text: '`satisfies` prüft die Kompatibilität mit einem Zieltyp, ohne die Variable auf diesen Zieltyp zu verbreitern. Typisierte Konfigurationen behalten dadurch ihre konkreten Eintragstypen.'
+          text: '`satisfies` prüft, ob ein Wert zu einem Typ passt, macht die Variable aber nicht zu diesem Typ. So behält jeder Eintrag einer Konfiguration seinen genauen Typ.'
         },
         {
           type: 'compare',
@@ -108,9 +108,9 @@
           type: 'table',
           head: ['Schreibweise', 'Wirkung'],
           rows: [
-            ['`const x: T = …`', 'Prüft die Zuweisung und deklariert die Variable als `T`.'],
-            ['`… as T`', 'Ist eine Typbehauptung und kann Typfehler verdecken.'],
-            ['`… satisfies T`', 'Prüft die Kompatibilität und behält den konkreten Ergebnistyp.']
+            ['`const x: T = …`', 'Prüft die Zuweisung, die Variable hat danach den Typ `T`.'],
+            ['`… as T`', 'Behauptet nur einen Typ und kann so Fehler verstecken.'],
+            ['`… satisfies T`', 'Prüft gegen `T`, der genaue Typ bleibt erhalten.']
           ]
         }
       ],
@@ -119,26 +119,26 @@
         { label: 'TypeScript 4.9: The satisfies Operator', url: 'https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-9.html#the-satisfies-operator' }
       ],
       notes: [
-        'Ältere Grundlage aus 4.9, vor unserem Zeitraum. Wir zeigen sie als Basis für typisierte Konfigurationen.',
-        'Im Playground den Typ von `annotated.home` und `routes.home` per Hover vergleichen.',
-        'Danach `account` in `acount` umbenennen oder `requiresAuth` einen String zuweisen: Die Prüfung am Objektliteral meldet den Fehler.',
-        '`satisfies` validiert keine Daten zur Laufzeit und macht ein Objekt nicht unveränderlich. Für unveränderliche Literaltypen kann zusätzlich `as const` sinnvoll sein.',
-        'Der Zieltyp kann die Inferenz kontextuell beeinflussen; alle Literale werden dadurch nicht automatisch konserviert.'
+        'Stammt aus 4.9 und ist damit älter als unser Zeitraum. Wir zeigen es trotzdem, weil es die Grundlage für typisierte Konfigurationen ist.',
+        'Im Playground mit der Maus über `annotated.home` und `routes.home` fahren und die Typen vergleichen.',
+        'Danach `account` in `acount` umbenennen oder `requiresAuth` einen String zuweisen: TypeScript meldet den Fehler direkt am Objekt.',
+        '`satisfies` prüft nichts zur Laufzeit und macht das Objekt auch nicht unveränderlich. Wer unveränderliche Literaltypen will, kann zusätzlich `as const` schreiben.',
+        'Der Zieltyp kann beeinflussen, welche Typen abgeleitet werden. Nicht jedes Literal bleibt dadurch automatisch als Literaltyp erhalten.'
       ]
     },
 
     {
       id: 'ts-const-type-parameter',
       topic: '`<const T>` · const-Typparameter',
-      kicker: 'TypeScript · Demo 2 · Typen mit weniger Hilfscode',
-      title: '`const`-Typparameter erhalten Literaltypen',
+      kicker: 'TypeScript · Demo 2 · Genauere Typen',
+      title: 'Genaue Literaltypen mit `const`-Typparametern',
       status: 'grundlage',
       since: 'TypeScript 5.0 · 2023',
       minutes: 2,
       blocks: [
         {
           type: 'lead',
-          text: 'Ein generischer Typparameter kann den Modifikator `const` tragen. Bei direkt übergebenen Literalen bevorzugt die Inferenz dann konkrete Literaltypen – ohne `as const` am Aufruf.'
+          text: 'Vor einen generischen Typparameter lässt sich `const` schreiben. Übergibt man dann direkt Literale, leitet TypeScript die genauen Literaltypen ab, ohne dass der Aufrufer `as const` braucht.'
         },
         {
           type: 'compare',
@@ -186,10 +186,10 @@
           type: 'columns',
           cols: [
             [
-              { type: 'callout', title: 'Constraint `readonly string[]`', text: 'Bei Arrays sollte die Constraint `readonly string[]` lauten. Mit `string[]` kann die Inferenz auf den allgemeineren Typ zurückfallen.' }
+              { type: 'callout', title: 'Constraint `readonly string[]`', text: 'Bei Arrays sollte die Constraint `readonly string[]` lauten. Mit `string[]` landet man unter Umständen wieder beim allgemeinen Typ.' }
             ],
             [
-              { type: 'code', lang: 'ts', label: 'Bereits verbreiterte Variablen', code: d`
+              { type: 'code', lang: 'ts', label: 'Variable mit schon allgemeinem Typ', code: d`
                 const input = ["home", "account"]; // string[]
                 const result = defineRoutesExactly(input); // weiterhin string[]
               ` }
@@ -202,25 +202,25 @@
         { label: 'TypeScript 5.0: const Type Parameters', url: 'https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#const-type-parameters' }
       ],
       notes: [
-        'Auch dieses Feature liegt vor unserem Zeitraum (5.0). Passt zu Hilfsfunktionen für Routen, Events oder Konfigurationen.',
-        'Typen von `before` und `routes` vergleichen, anschließend die ungültige Route `admin` aktivieren.',
-        'Das `const` steht am Typparameter – es ist keine neue Schreibweise für einen normalen Funktionsparameter.',
-        'Der Modifikator friert keine Werte zur Laufzeit ein. `satisfies` prüft Kompatibilität; `const`-Typparameter steuern die Inferenz beim generischen Aufruf.'
+        'Auch dieses Feature ist älter als unser Zeitraum (5.0). Praktisch für Hilfsfunktionen rund um Routen, Events oder Konfigurationen.',
+        'Die Typen von `before` und `routes` vergleichen, dann die Zeile mit der ungültigen Route `admin` einkommentieren.',
+        'Das `const` gehört zum Typparameter, nicht zum normalen Funktionsparameter.',
+        'Zur Laufzeit friert `const` hier nichts ein. Kurz gesagt: `satisfies` prüft, ob etwas passt, `const`-Typparameter bestimmen, welcher Typ beim Aufruf abgeleitet wird.'
       ]
     },
 
     {
       id: 'ts-type-predicates',
       topic: 'Inferred Type Predicates',
-      kicker: 'TypeScript · Demo 3 · Typen mit weniger Hilfscode',
-      title: '`filter` leitet den Ergebnistyp ab',
+      kicker: 'TypeScript · Demo 3 · Genauere Typen',
+      title: '`filter` kennt den richtigen Ergebnistyp',
       status: 'neu',
       since: 'TypeScript 5.5 · 2024',
       minutes: 3,
       blocks: [
         {
           type: 'lead',
-          text: 'Seit 5.5 leitet TypeScript aus passenden Filterfunktionen ein Type Predicate ab. Besonders nützlich bei optionalen API-Werten; vorher war dafür häufig eine explizite Annotation nötig.'
+          text: 'Seit 5.5 erkennt TypeScript bei geeigneten Filterfunktionen selbst, dass sie ein Type Predicate sind. Das hilft vor allem bei optionalen Werten aus einer API. Vorher musste man das oft von Hand annotieren.'
         },
         {
           type: 'compare',
@@ -258,32 +258,32 @@
           type: 'callout',
           tone: 'warn',
           title: '`filter(Boolean)` ist kein gleichwertiger Ersatz',
-          text: 'Ein Truthiness-Test würde auch die Zahl `0` entfernen. Im Beispiel bleibt die `0` erhalten.'
+          text: '`Boolean` wirft auch die Zahl `0` raus, weil sie als falsy gilt. Im Beispiel bleibt die `0` drin.'
         }
       ],
-      support: { text: typeOnly + ' Mindestens TypeScript 5.5 mit `strictNullChecks` (im Playground standardmäßig aktiv).' },
+      support: { text: typeOnly + ' Ab TypeScript 5.5 und nur mit `strictNullChecks` (im Playground standardmäßig an).' },
       sources: [
         { label: 'TypeScript 5.5: Inferred Type Predicates', url: 'https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-5.html#inferred-type-predicates' }
       ],
       notes: [
-        'Im Playground zwischen 5.4 und 5.5 wechseln und den Typ von `after` zeigen: `(number | undefined)[]` gegenüber `number[]`.',
-        'In 5.4 meldet `value.toFixed` einen Fehler, weil `value` möglicherweise `undefined` ist.',
-        'Die Null bleibt erhalten – darum ist `filter(Boolean)` kein Ersatz.'
+        'Im Playground zwischen 5.4 und 5.5 wechseln und jeweils den Typ von `after` zeigen: erst `(number | undefined)[]`, dann `number[]`.',
+        'In 5.4 gibt es bei `value.toFixed` einen Fehler, weil `value` noch `undefined` sein könnte.',
+        'Die Null bleibt drin. Mit `filter(Boolean)` wäre sie weg.'
       ]
     },
 
     {
       id: 'ts-truthy-checks',
-      topic: 'Prüfung immer wahrer Bedingungen',
-      kicker: 'TypeScript · Demo 4 · Frühere Fehlermeldungen',
-      title: 'Der Compiler entdeckt eine vergessene Methode',
+      topic: 'Bedingungen, die immer wahr sind',
+      kicker: 'TypeScript · Demo 4 · Fehler früher finden',
+      title: 'Der Compiler bemerkt ein vergessenes `.test()`',
       status: 'neu',
       since: 'TypeScript 5.6 · 2024',
       minutes: 1,
       blocks: [
         {
           type: 'lead',
-          text: '5.6 meldet bestimmte syntaktisch erkennbar immer wahre oder nie nullische Ausdrücke. Ein RegExp-Objekt als Bedingung ist ein leicht nachvollziehbarer Fehler.'
+          text: 'Seit 5.6 meldet TypeScript Bedingungen, die schon am Code erkennbar immer wahr sind oder nie `null` sein können. Ein typisches Beispiel: Ein regulärer Ausdruck steht allein im `if`, weil `.test()` fehlt.'
         },
         {
           type: 'compare',
@@ -330,14 +330,14 @@
           }
         }
       ],
-      support: { text: 'Compilerprüfung ab TypeScript 5.6. Ersetzt weder Tests noch sämtliche Lint-Regeln.' },
+      support: { text: 'Prüfung im Compiler ab TypeScript 5.6. Tests und Linter braucht es trotzdem.' },
       sources: [
         { label: 'TypeScript 5.6: Disallowed Nullish and Truthy Checks', url: 'https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-6.html#disallowed-nullish-and-truthy-checks' }
       ],
       notes: [
-        'Rechts läuft der Code als JavaScript: Mit `XYZ-123` meldet die Variante ohne `.test` trotzdem einen Treffer.',
-        'Im Playground mit 5.5 und 5.6 öffnen: Erst 5.6 meldet „This kind of expression is always truthy“.',
-        'Dann `.test(ticket)` ergänzen. Der Compiler ersetzt weder Tests noch Lint-Regeln.'
+        'Rechts läuft der Code als JavaScript: Obwohl das Ticket `XYZ-123` heißt, meldet die Variante ohne `.test` einen Treffer.',
+        'Im Playground mit 5.5 und mit 5.6 öffnen: Erst 5.6 meldet „This kind of expression is always truthy“.',
+        'Dann `.test(ticket)` ergänzen. Tests und Lint-Regeln macht das nicht überflüssig.'
       ]
     },
 
@@ -345,7 +345,7 @@
       id: 'ts-noinfer',
       topic: '`NoInfer<T>`',
       kicker: 'TypeScript · Reserve',
-      title: '`NoInfer` begrenzt die Inferenz',
+      title: '`NoInfer` schließt einen Parameter von der Inferenz aus',
       status: 'neu',
       role: 'reserve',
       since: 'TypeScript 5.4 · 2024',
@@ -353,7 +353,7 @@
       blocks: [
         {
           type: 'lead',
-          text: '`NoInfer` verhindert, dass ein Parameter zusätzliche Kandidaten für einen generischen Typ liefert. Der Standardwert darf nur aus den angebotenen Optionen stammen.'
+          text: 'Mit `NoInfer` zählt ein Parameter nicht mit, wenn TypeScript den generischen Typ ableitet. So muss der Startwert eine der angebotenen Optionen sein.'
         },
         {
           type: 'compare',
@@ -394,8 +394,8 @@
         { label: 'TypeScript 5.4: The NoInfer Utility Type', url: 'https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-4.html#the-noinfer-utility-type' }
       ],
       notes: [
-        '`NoInfer` entfernen und zeigen, dass `medium` dann zur Inferenz beiträgt und kein Fehler mehr kommt. Danach wieder einsetzen.',
-        'Das ist ein Typwerkzeug. Daten aus einem Netzwerk benötigen weiterhin Laufzeitvalidierung.'
+        '`NoInfer` entfernen: Jetzt fließt `medium` in den abgeleiteten Typ ein, und der Fehler verschwindet. Danach wieder einsetzen.',
+        '`NoInfer` wirkt nur auf Typen. Daten, die über das Netz kommen, müssen wir weiterhin zur Laufzeit prüfen.'
       ]
     },
 
@@ -411,7 +411,7 @@
       blocks: [
         {
           type: 'lead',
-          text: 'Ab 5.4 erkennt TypeScript bei bestimmten Closures die letzte Zuweisung. Der bereits eingegrenzte Typ bleibt verfügbar. Vorher ließ sich eine konstante lokale Variable als Ausweg verwenden.'
+          text: 'Ab 5.4 erkennt TypeScript in vielen Fällen, dass eine Variable nach der letzten Zuweisung nicht mehr geändert wird. Dann gilt der eingegrenzte Typ auch im Callback. Früher half man sich mit einer zusätzlichen `const`-Variable.'
         },
         {
           type: 'demo', kind: 'ts',
@@ -438,7 +438,7 @@
       ],
       notes: [
         '5.3 und 5.4 im Playground vergleichen.',
-        'Weitere Zuweisungen in verschachtelten Funktionen können das Narrowing verhindern.'
+        'Wird die Variable noch in einer verschachtelten Funktion neu zugewiesen, klappt das Narrowing nicht mehr.'
       ]
     },
 
@@ -446,7 +446,7 @@
       id: 'ts-6-7',
       topic: 'TypeScript 6.0 · 7.0',
       kicker: 'TypeScript · Aktueller Compiler',
-      title: 'TypeScript 6 und 7 einordnen',
+      title: 'Was TypeScript 6 und 7 für uns bedeuten',
       status: 'neu',
       role: 'einordnung',
       since: '6.0 · 2026 · 7.0 seit 8. Juli 2026',
@@ -460,10 +460,10 @@
               {
                 type: 'list',
                 items: [
-                  'Übergang zum nativen Compiler.',
-                  'Geänderte Defaults, unter anderem für `rootDir` und `types`.',
-                  'Veraltete Optionen wie `baseUrl` und `moduleResolution: node10`.',
-                  'Ein Compiler-Upgrade kann deshalb Konfigurationsarbeit auslösen.'
+                  'Zwischenschritt auf dem Weg zum nativen Compiler.',
+                  'Neue Standardwerte, unter anderem für `rootDir` und `types`.',
+                  'Optionen wie `baseUrl` und `moduleResolution: node10` gelten als veraltet.',
+                  'Beim Upgrade muss man deshalb wahrscheinlich die Konfiguration anpassen.'
                 ]
               }
             ],
@@ -472,10 +472,10 @@
               {
                 type: 'list',
                 items: [
-                  'In Go implementiert, parallelisiert die Arbeit, neuer Language Server.',
-                  'Veröffentlichte Beschleunigungen gelten für konkrete Projekte und Maschinen – keine feste Zahl für unser Projekt.',
-                  'Noch keine programmgesteuerte Compiler-API.',
-                  'Kompatibilität integrierter Werkzeuge und Frameworks gesondert prüfen.'
+                  'In Go geschrieben, arbeitet parallel, bringt einen neuen Language Server mit.',
+                  'Die veröffentlichten Messwerte stammen aus bestimmten Projekten auf bestimmten Rechnern. Wie viel schneller es bei uns wird, sagen sie nicht.',
+                  'Eine Compiler-API für eigene Werkzeuge gibt es noch nicht.',
+                  'Ob unsere Werkzeuge und Frameworks damit laufen, müssen wir einzeln prüfen.'
                 ]
               }
             ]
@@ -487,8 +487,8 @@
         { label: 'Announcing TypeScript 7.0', url: 'https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/' }
       ],
       notes: [
-        'Kurz halten: Was bedeutet das für unsere Projekte? 6.0 bringt Konfigurationsarbeit, 7.0 Geschwindigkeit, aber noch keine Compiler-API.',
-        'Für Werkzeuge, die die Compiler-API nutzen (Linter, Codegeneratoren, Framework-Plugins), Kompatibilität vor dem Upgrade prüfen.'
+        'Kurz halten. Für unsere Projekte heißt das: 6.0 bedeutet Arbeit an der Konfiguration, 7.0 bringt Tempo, aber noch keine Compiler-API.',
+        'Werkzeuge, die auf der Compiler-API aufbauen (Linter, Codegeneratoren, Framework-Plugins), vor dem Upgrade prüfen.'
       ]
     },
 
@@ -496,20 +496,20 @@
       id: 'ts-performance',
       topic: '`tsc --extendedDiagnostics`',
       kicker: 'TypeScript · Optional',
-      title: 'Performance-Vergleich am eigenen Projekt',
+      title: 'Wie schnell ist 7.0 bei uns?',
       role: 'optional',
       minutes: 3,
       blocks: [
         {
           type: 'lead',
-          text: 'Nur mit vorbereiteten Messungen zeigen. Ein einzelner Lauf mit unterschiedlichem Cache wäre wenig aussagekräftig.'
+          text: 'Nur zeigen, wenn wir vorher gemessen haben. Ein einzelner Lauf mit unterschiedlich gefülltem Cache sagt wenig aus.'
         },
         {
           type: 'list',
           items: [
-            'Getrennte Checkouts mit fest installierten Compiler-Versionen und derselben angepassten Konfiguration.',
-            'Identischer Commit, identische Hardware, gleiche Cache-Bedingungen.',
-            'Mehrere Durchläufe messen; Versionsnummern und Median zeigen.'
+            'Zwei getrennte Checkouts, jeweils mit fest installierter Compiler-Version und derselben angepassten Konfiguration.',
+            'Gleicher Commit, gleiche Hardware, gleicher Cache-Zustand.',
+            'Mehrmals messen, dann Versionsnummern und Median zeigen.'
           ]
         },
         {
@@ -526,43 +526,43 @@
         { label: 'Announcing TypeScript 7.0', url: 'https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/' }
       ],
       notes: [
-        'Diese Folie nur einsetzen, wenn Messwerte vorab erhoben wurden.'
+        'Diese Folie nur zeigen, wenn wir vorher gemessen haben.'
       ]
     },
 
     {
       id: 'ts-ablauf',
       kicker: 'TypeScript · Vorbereitung',
-      title: 'Vorbereitung und Einsatz',
+      title: 'Ablauf und Vorbereitung',
       role: 'einordnung',
       blocks: [
         {
           type: 'columns',
           cols: [
             [
-              { type: 'h', text: 'Empfohlene Vorführung in 10 bis 12 Minuten' },
+              { type: 'h', text: 'Vorschlag für 10 bis 12 Minuten' },
               {
                 type: 'list',
                 ordered: true,
                 items: [
                   '`satisfies` und die Konfiguration',
-                  '`const`-Typparameter mit präzisen Routennamen',
-                  'Typwechsel beim Filter',
-                  'Verdächtige Bedingung als aufgedeckter Fehler',
-                  'TypeScript 6.0 und 7.0 kurz einordnen'
+                  '`const`-Typparameter und genaue Routennamen',
+                  'Der richtige Typ nach `filter`',
+                  'Der Compiler findet eine verdächtige Bedingung',
+                  'Kurz zu TypeScript 6.0 und 7.0'
                 ]
               },
-              { type: 'p', text: '`NoInfer` und die Closure-Demo bleiben Reserve.' }
+              { type: 'p', text: '`NoInfer` und die Closure-Demo halten wir in Reserve.' }
             ],
             [
               { type: 'h', text: 'Vorbereitung' },
               {
                 type: 'list',
                 items: [
-                  'Für die Typdemos den [TypeScript Playground](https://www.typescriptlang.org/play) verwenden; `strictNullChecks` ist dort über `strict` aktiv.',
-                  'Die Buttons öffnen den aktuellen Editorinhalt mit fest gewählter Compiler-Version.',
-                  'Beispiele getrennt öffnen, damit absichtliche Fehler die anderen Demos nicht verdecken.',
-                  'Browserunterstützung spielt für `satisfies`, `const`-Typparameter, `NoInfer` und Type Predicates keine Rolle.'
+                  'Die Typdemos im [TypeScript Playground](https://www.typescriptlang.org/play) zeigen. Dort ist `strict` und damit auch `strictNullChecks` eingeschaltet.',
+                  'Die Buttons öffnen den aktuellen Code aus dem Editor mit einer fest eingestellten Compiler-Version.',
+                  'Jedes Beispiel einzeln öffnen, damit die absichtlichen Fehler einer Demo nicht die anderen überdecken.',
+                  'Für `satisfies`, `const`-Typparameter, `NoInfer` und Type Predicates ist egal, welcher Browser läuft.'
                 ]
               }
             ]
@@ -576,7 +576,7 @@
         { label: 'TypeScript 5.9', url: 'https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-9.html' }
       ],
       notes: [
-        'Übergang zu JavaScript: TypeScript beschreibt Typen – welche Methoden zur Laufzeit existieren, entscheidet die Umgebung.'
+        'Überleitung zu JavaScript: TypeScript beschreibt nur Typen. Welche Methoden es zur Laufzeit wirklich gibt, hängt von der Umgebung ab.'
       ]
     }
   ]);

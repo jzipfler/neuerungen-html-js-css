@@ -2,7 +2,7 @@
   'use strict';
   const { add, d } = Deck;
 
-  const runtimeNote = 'Eine ECMAScript-Jahresangabe garantiert keinen Support im Zielbrowser, in einer WebView oder in der eingesetzten Node-Version.';
+  const runtimeNote = 'Dass ein Feature zu einer ECMAScript-Ausgabe gehört, heißt noch nicht, dass unsere Zielbrowser, WebViews oder Node-Versionen es kennen.';
 
   add('js', [
     {
@@ -14,22 +14,22 @@
       blocks: [
         {
           type: 'lead',
-          text: 'Die jährliche ECMAScript-Ausgabe beschreibt den Sprachstandard. Browser und Node.js liefern Features unabhängig davon aus.'
+          text: 'Jedes Jahr erscheint eine neue Ausgabe des ECMAScript-Standards. Browser und Node.js bauen neue Features aber nach eigenem Zeitplan ein.'
         },
         {
           type: 'table',
           head: ['Ausgabe', 'Relevante Neuerungen', 'Auswahl'],
           rows: [
             ['ES2022', '`.at()` für Arrays, Strings und TypedArrays', 'Ja · ältere Grundlage'],
-            ['ES2023', '`toSorted`, `toReversed`, `toSpliced`, `with`; `findLast` und `findLastIndex`', 'Ältere Grundlage'],
+            ['ES2023', '`toSorted`, `toReversed`, `toSpliced`, `with`; `findLast`, `findLastIndex`', 'Ältere Grundlage'],
             ['ES2024', '`Object.groupBy` und `Map.groupBy`; `Promise.withResolvers`; RegExp `v`-Flag; wohlgeformte Unicode-Strings; veränderbare Buffer', '`groupBy`'],
-            ['ES2025', 'Set-Operationen; Iterator Helpers; `RegExp.escape`; `Promise.try`; Import Attributes und JSON-Module; `Float16Array`; RegExp-Modifikatoren', 'Sets und Iteratoren'],
-            ['ES2026', '`Array.fromAsync`; `Iterator.concat`; `Math.sumPrecise`; `Error.isError`; Map `getOrInsert`; `Uint8Array` Base64 und Hex; `JSON.parse` Quelltextzugriff', 'Optional']
+            ['ES2025', 'Set-Operationen; Iterator Helpers; `RegExp.escape`; `Promise.try`; Import Attributes, JSON-Module; `Float16Array`; RegExp-Modifikatoren', 'Sets und Iteratoren'],
+            ['ES2026', '`Array.fromAsync`; `Iterator.concat`; `Math.sumPrecise`; `Error.isError`; `getOrInsert` für Maps; Base64 und Hex für `Uint8Array`; Zugriff auf den Originaltext in `JSON.parse`', 'Optional']
           ]
         },
         {
           type: 'callout',
-          text: 'ES2023 erschien im Juni 2023 und liegt vor unserem Startdatum. ES2026 ist als 17. Ausgabe im Juni 2026 erschienen. **Temporal** und **Explicit Resource Management** führt die geprüfte TC39-Liste mit geplantem Jahr 2027 – sie sind hier keine ES2026-Features.'
+          text: 'ES2023 erschien im Juni 2023, also kurz vor unserem Zeitraum. ES2026 ist im Juni 2026 als 17. Ausgabe erschienen. **Temporal** und **Explicit Resource Management** stehen in der TC39-Liste erst für 2027, gehören also nicht zu ES2026.'
         }
       ],
       sources: [
@@ -39,15 +39,15 @@
       ],
       notes: [
         'Quellen geprüft am 5. Oktober 2026.',
-        'Die laufende TC39-Spezifikation enthält bereits Ergänzungen für spätere Ausgaben. Bei Jahresangaben verwenden wir die Jahresausgabe oder die Finished-Proposals-Liste.',
-        'Alle JavaScript-Demos laufen live im Browser, in dem die Präsentation geöffnet ist.'
+        'Der aktuelle Arbeitsstand der Spezifikation enthält schon Features für kommende Ausgaben. Die Jahreszahlen hier stammen deshalb aus den veröffentlichten Ausgaben oder der Liste der Finished Proposals.',
+        'Alle JavaScript-Demos laufen live in dem Browser, in dem die Präsentation gerade offen ist.'
       ]
     },
 
     {
       id: 'js-at',
       topic: '`Array.prototype.at()`',
-      kicker: 'JavaScript · Demo 1 · Relative Indizes',
+      kicker: 'JavaScript · Demo 1 · Vom Ende her zählen',
       title: 'Das letzte Element mit `.at()` lesen',
       status: 'grundlage',
       since: 'ES2022',
@@ -55,7 +55,7 @@
       blocks: [
         {
           type: 'lead',
-          text: 'Negative Indizes vereinfachen den Zugriff vom Ende aus: `0` ist das erste Element, `-1` das letzte, `-2` das vorletzte.'
+          text: 'Mit negativen Indizes zählt man einfach vom Ende her: `0` ist das erste Element, `-1` das letzte, `-2` das vorletzte.'
         },
         {
           type: 'compare',
@@ -96,21 +96,21 @@
         },
         {
           type: 'callout',
-          text: '`.at()` dient zum Lesen. Zum Schreiben weiterhin `events[events.length - 1] = value` verwenden. Bei Strings arbeitet `.at()` mit UTF-16-Codeeinheiten; ein Emoji kann aus mehreren Einheiten bestehen.'
+          text: '`.at()` ist nur zum Lesen da. Geschrieben wird weiterhin mit `events[events.length - 1] = value`. Bei Strings zählt `.at()` UTF-16-Codeeinheiten, und ein Emoji kann aus mehreren davon bestehen.'
         }
       ],
       support: {
-        text: 'Breit verfügbar seit ES2022.',
+        text: 'Seit ES2022 in allen gängigen Browsern verfügbar.',
         test: () => typeof Array.prototype.at === 'function'
       },
       sources: [
         { label: 'TC39 Relative Indexing Method', url: 'https://tc39.es/proposal-relative-indexing-method/' }
       ],
       notes: [
-        'Kurzer Einstieg, ältere Grundlage aus ES2022.',
-        'Ein weiteres Ereignis anhängen und erneut `.at(-1)` aufrufen. Danach das Array leeren.',
-        'Die Methode verändert die Sammlung nicht. Außerhalb des Bereichs liefert sie `undefined`.',
-        'Bei `events[-1]` wird eine Eigenschaft mit dem Namen `"-1"` gelesen.'
+        'Kurzer Einstieg mit einem älteren Feature aus ES2022.',
+        'Ein weiteres Ereignis anhängen und noch einmal `.at(-1)` aufrufen. Danach das Array leeren.',
+        'Das Array bleibt dabei unverändert. Liegt der Index außerhalb, kommt `undefined` zurück.',
+        '`events[-1]` liest dagegen eine Eigenschaft mit dem Namen `"-1"`.'
       ]
     },
 
@@ -118,14 +118,14 @@
       id: 'js-groupby',
       topic: '`Object.groupBy()` · `Map.groupBy()`',
       kicker: 'JavaScript · Demo 2 · Daten gruppieren',
-      title: 'Gruppieren ohne eigene Sammellogik',
+      title: 'Gruppieren ohne `reduce`',
       status: 'neu',
       since: 'ES2024',
       minutes: 3,
       blocks: [
         {
           type: 'lead',
-          text: '`Object.groupBy` bündelt Elemente anhand eines Schlüssels. Für Aufgaben nach Status oder Mitarbeitende nach Team entfällt eine selbst geschriebene `reduce`-Sammellogik.'
+          text: '`Object.groupBy` sortiert Elemente nach einem Schlüssel in Gruppen. Ob Aufgaben nach Status oder Mitarbeitende nach Team: Das selbst geschriebene `reduce` fällt weg.'
         },
         {
           type: 'compare',
@@ -172,7 +172,7 @@
         },
         {
           type: 'callout',
-          text: 'Das Ergebnis hat keinen Objekt-Prototyp. Für Objekte als Gruppenschlüssel eignet sich `Map.groupBy`. Die enthaltenen Objekte werden nicht tief kopiert.'
+          text: 'Das Ergebnis hat keinen Prototyp. Wer Objekte als Schlüssel braucht, nimmt `Map.groupBy`. Die Elemente selbst werden nicht kopiert, die Gruppen verweisen auf die Originale.'
         }
       ],
       support: {
@@ -183,9 +183,9 @@
         { label: 'TC39 Array Grouping', url: 'https://github.com/tc39/proposal-array-grouping' }
       ],
       notes: [
-        'Einen neuen Status hinzufügen, etwa `{ title: "Import", status: "blocked" }` – die Gruppe entsteht automatisch.',
-        'Zum Prüfen einer Gruppe `Object.hasOwn` verwenden, weil das Ergebnis keinen Prototyp hat.',
-        'Einsatzstelle im Team nennen: Gruppierung in einer Tabelle oder Liste.'
+        'Einen Eintrag mit neuem Status hinzufügen, etwa `{ title: "Import", status: "blocked" }`. Die passende Gruppe entsteht von selbst.',
+        'Ob es eine Gruppe gibt, prüft man mit `Object.hasOwn`, weil das Ergebnis keinen Prototyp hat.',
+        'Ein Beispiel aus unseren Projekten nennen: eine gruppierte Tabelle oder Liste.'
       ]
     },
 
@@ -193,14 +193,14 @@
       id: 'js-set-methods',
       topic: '`intersection()` · `difference()` · `union()`',
       kicker: 'JavaScript · Demo 3 · Mengen vergleichen',
-      title: 'Überschneidungen mit Sets',
+      title: 'Schnittmengen mit Sets',
       status: 'neu',
       since: 'ES2025',
       minutes: 2,
       blocks: [
         {
           type: 'lead',
-          text: 'Die neuen Set-Methoden drücken Mengenoperationen direkt aus. Bei Rollen, Tags oder Filterauswahlen ist das Ergebnis sofort verständlich.'
+          text: 'Mit den neuen Set-Methoden schreibt man Mengenoperationen so hin, wie man sie meint. Bei Rollen, Tags oder ausgewählten Filtern liest sich das sofort.'
         },
         {
           type: 'compare',
@@ -234,7 +234,7 @@
         },
         {
           type: 'callout',
-          text: 'Die ursprünglichen Sets bleiben unverändert. Ergänzend gibt es `symmetricDifference`, `isSubsetOf`, `isSupersetOf` und `isDisjointFrom`. Objektwerte werden über ihre Identität verglichen.'
+          text: 'Die beiden Ausgangs-Sets bleiben unverändert. Außerdem gibt es `symmetricDifference`, `isSubsetOf`, `isSupersetOf` und `isDisjointFrom`. Objekte gelten nur als gleich, wenn es dasselbe Objekt ist.'
         }
       ],
       support: {
@@ -245,9 +245,9 @@
         { label: 'TC39 Set Methods', url: 'https://github.com/tc39/proposal-set-methods' }
       ],
       notes: [
-        'Dieselben fachlichen Daten wie zuvor nutzen – etwa Tags oder Rollen.',
-        'Mit einem weiteren Tag das Ergebnis ändern, zum Beispiel `"HTML"` zu `chosen` hinzufügen.',
-        'Einsatzstelle: Tagfilter, Berechtigungen.'
+        'Am besten mit denselben Beispieldaten wie vorher weitermachen, etwa Tags oder Rollen.',
+        'Ein weiteres Tag ergänzen, zum Beispiel `"HTML"` in `chosen`, und zeigen, wie sich das Ergebnis ändert.',
+        'Wo das passt: Tagfilter, Berechtigungen.'
       ]
     },
 
@@ -255,19 +255,19 @@
       id: 'js-iterator-helpers',
       topic: 'Iterator Helpers · `filter()` · `take()` · `toArray()`',
       kicker: 'JavaScript · Demo 4 · Iteratoren',
-      title: 'Iteratoren verarbeiten nur benötigte Werte',
+      title: 'Iteratoren berechnen nur, was gebraucht wird',
       status: 'neu',
       since: 'ES2025 · Baseline seit 31. März 2025',
       minutes: 3,
       blocks: [
         {
           type: 'lead',
-          text: 'Iterator Helpers erlauben `map`, `filter` und `take` direkt auf Iteratoren. Die Berechnung startet erst beim Verbrauch – interessant bei Generatoren und großen Datenfolgen.'
+          text: 'Mit Iterator Helpers gehen `map`, `filter` und `take` direkt auf Iteratoren. Gerechnet wird erst, wenn jemand die Werte abholt. Das lohnt sich bei Generatoren und großen Datenmengen.'
         },
         {
           type: 'compare',
           before: {
-            label: 'Vorher: alle Werte materialisieren',
+            label: 'Vorher: erst alle Werte erzeugen',
             blocks: [{
               type: 'demo', kind: 'js',
               js: d`
@@ -284,7 +284,7 @@
             }]
           },
           after: {
-            label: 'Heute: erst bei toArray berechnen',
+            label: 'Heute: erst bei toArray rechnen',
             blocks: [{
               type: 'demo', kind: 'js',
               js: d`
@@ -306,7 +306,7 @@
         },
         {
           type: 'callout',
-          text: 'Ein verbrauchter Iterator lässt sich nicht wie ein Array erneut durchlaufen. Async Iterator Helpers sind ein eigenes Thema und gehören nicht zu diesen synchronen Helpers.'
+          text: 'Anders als ein Array lässt sich ein Iterator nur einmal durchlaufen. Async Iterator Helpers sind ein separater Vorschlag und hier nicht enthalten.'
         }
       ],
       support: {
@@ -318,9 +318,9 @@
         { label: 'web.dev: Iterator Helpers sind Baseline', url: 'https://web.dev/blog/baseline-iterator-helpers' }
       ],
       notes: [
-        'Sichtbarer Effekt: Links erscheinen 100 „Erzeuge“-Zeilen, rechts nur vier.',
-        'Vor `toArray` erscheint rechts noch keine „Erzeuge“-Ausgabe.',
-        'Variante: `take(2)` auf `take(5)` ändern.'
+        'Der Unterschied ist gut zu sehen: Links stehen 100 „Erzeuge“-Zeilen in der Ausgabe, rechts nur vier.',
+        'Rechts erscheint vor `toArray` noch keine einzige „Erzeuge“-Zeile.',
+        'Zum Ausprobieren: `take(2)` in `take(5)` ändern.'
       ]
     },
 
@@ -328,7 +328,7 @@
       id: 'js-regexp-escape',
       topic: '`RegExp.escape()`',
       kicker: 'JavaScript · Reserve',
-      title: 'Text als literales RegExp-Muster verwenden',
+      title: 'Suchtext sicher in einen regulären Ausdruck einbauen',
       status: 'neu',
       role: 'reserve',
       since: 'ES2025',
@@ -336,7 +336,7 @@
       blocks: [
         {
           type: 'lead',
-          text: '`RegExp.escape` maskiert Text für ein reguläres Ausdrucksmuster. Punkte und Klammern im Suchtext werden als Text behandelt – eine eigene, oft unvollständige Ersetzungsliste entfällt.'
+          text: '`RegExp.escape` maskiert alle Sonderzeichen in einem Text, damit er in einem regulären Ausdruck wörtlich gesucht wird. Punkte und Klammern bleiben dann einfach Punkte und Klammern. Die eigene, oft lückenhafte Ersetzungsliste kann weg.'
         },
         {
           type: 'compare',
@@ -369,7 +369,7 @@
         },
         {
           type: 'callout',
-          text: 'Bei einer reinen Teilstringsuche ist `includes` oft einfacher. `RegExp.escape` schützt den Mustertext; es ist keine HTML-Escaping-Funktion.'
+          text: 'Wer nur einen Teilstring sucht, ist mit `includes` oft besser bedient. Und: `RegExp.escape` ist nur für reguläre Ausdrücke gedacht, nicht zum Escapen von HTML.'
         }
       ],
       support: {
@@ -380,7 +380,7 @@
         { label: 'TC39 RegExp Escaping', url: 'https://github.com/tc39/proposal-regex-escaping' }
       ],
       notes: [
-        '`query` auf einen Text mit Klammern ändern, etwa `"Preis (netto)"`, und gegen `"Preis (netto)"` testen.'
+        '`query` auf einen Text mit Klammern setzen, etwa `"Preis (netto)"`, und genau diesen Text testen.'
       ]
     },
 
@@ -396,7 +396,7 @@
       blocks: [
         {
           type: 'lead',
-          text: '`getOrInsertComputed` legt einen Map-Wert erst bei einem fehlenden Schlüssel an. Das passt zu Caches und Gruppenlisten.'
+          text: '`getOrInsertComputed` liefert den vorhandenen Wert oder legt ihn an, wenn der Schlüssel fehlt. Praktisch für Caches und gruppierte Listen.'
         },
         {
           type: 'compare',
@@ -433,30 +433,30 @@
         {
           type: 'callout',
           tone: 'warn',
-          text: 'Ein vorhandener `undefined`-Wert zählt als vorhandener Eintrag; die Methode prüft die Schlüsselpräsenz. In Node.js 24.19.0 fehlte die Methode noch – nur in einer geeigneten Umgebung zeigen.'
+          text: 'Entscheidend ist, ob der Schlüssel existiert: Ein Eintrag mit dem Wert `undefined` gilt als vorhanden. In Node.js 24.19.0 gab es die Methode noch nicht, also nur zeigen, wo sie verfügbar ist.'
         }
       ],
       support: {
-        text: 'ES2026. Fehlte in der geprüften Node.js-Version 24.19.0. Fehlt sie im Browser, zeigt die Demo einen `TypeError`.',
+        text: 'ES2026. In der getesteten Node.js-Version 24.19.0 noch nicht vorhanden. Kennt der Browser die Methode nicht, zeigt die Demo einen `TypeError`.',
         test: () => typeof Map.prototype.getOrInsertComputed === 'function'
       },
       sources: [
         { label: 'TC39 Upsert', url: 'https://github.com/tc39/proposal-upsert' }
       ],
       notes: [
-        'Nur zeigen, wenn der Live-Check grün ist. Sonst ist die Fehlermeldung selbst ein gutes Argument für den Supportcheck.'
+        'Nur zeigen, wenn der Live-Check grün ist. Andernfalls ist die Fehlermeldung selbst ein gutes Argument, vorher den Support zu prüfen.'
       ]
     },
 
     {
       id: 'js-support',
       kicker: 'JavaScript · Support',
-      title: 'Support vor der Vorführung prüfen',
+      title: 'Vor der Vorführung prüfen, was der Browser kann',
       role: 'einordnung',
       blocks: [
         {
           type: 'lead',
-          text: 'Die Prüfungen laufen live in diesem Browser. Bei fehlenden Methoden die ältere Lösung zeigen oder vorab einen passenden Polyfill auswählen.'
+          text: 'Die Prüfungen laufen live in diesem Browser. Fehlt eine Methode, zeigen wir die alte Lösung oder binden vorher einen passenden Polyfill ein.'
         },
         {
           type: 'checks',
@@ -472,7 +472,7 @@
         {
           type: 'callout',
           title: 'Abgrenzung zu TypeScript',
-          text: '`target` und `lib` steuern Übersetzung und Typdeklarationen. Sie installieren keine neuen Built-in-Methoden. `.at()`, `groupBy`, Set-Operationen, Iterator Helpers und `RegExp.escape` wurden mit Node.js 24.19.0 geprüft. Die Prüfung in euren Zielbrowsern und Node-Versionen steht noch aus.'
+          text: '`target` und `lib` legen fest, wohin kompiliert wird und welche Typen bekannt sind. Neue eingebaute Methoden bringen sie nicht mit. `.at()`, `groupBy`, Set-Operationen, Iterator Helpers und `RegExp.escape` haben wir in Node.js 24.19.0 getestet. In unseren Zielbrowsern und Node-Versionen müssen wir das noch tun.'
         }
       ],
       sources: [
@@ -481,9 +481,9 @@
         { label: 'Baseline 2026', url: 'https://web.dev/baseline/2026' }
       ],
       notes: [
-        'Empfohlener Ablauf in 10 bis 12 Minuten: `.at()` als kurzer Einstieg, dann `groupBy`, danach dieselben Daten für einen Mengenvergleich, Iterator Helpers mit Konsolenausgaben als sichtbarem Effekt.',
-        '`RegExp.escape` oder `getOrInsertComputed` als Reserve.',
-        'Bei jedem Beispiel eine konkrete Einsatzstelle nennen: Gruppierung in einer Tabelle, Tagfilter, Cache.'
+        'Vorschlag für 10 bis 12 Minuten: `.at()` als kurzer Einstieg, dann `groupBy`, mit denselben Daten weiter zu den Set-Methoden, zum Schluss Iterator Helpers, bei denen die Konsolenausgabe den Unterschied zeigt.',
+        '`RegExp.escape` und `getOrInsertComputed` halten wir in Reserve.',
+        'Zu jedem Beispiel eine konkrete Stelle bei uns nennen: gruppierte Tabelle, Tagfilter, Cache.'
       ]
     }
   ]);

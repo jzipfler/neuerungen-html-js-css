@@ -27,26 +27,26 @@
         {
           type: 'callout',
           title: 'Roter Faden',
-          text: 'Was übernimmt der Browser heute, wofür wir bisher eigene Komponenten, Bibliotheken oder zusätzliche JavaScript-Logik gebraucht haben?'
+          text: 'Was erledigt der Browser heute selbst, wofür wir bisher eigene Komponenten, Bibliotheken oder zusätzliches JavaScript gebraucht haben?'
         },
         {
           type: 'table',
-          head: ['Feature', 'Einordnung', 'Nutzen für die Demo'],
+          head: ['Feature', 'Stand', 'Worum es geht'],
           rows: [
-            ['`<dialog>` und `showModal()`', 'Browserübergreifend seit 2022, ältere Grundlage', 'Native modale Interaktion verstehen'],
-            ['`<details name="…">`', 'Baseline 2024', 'Höchstens ein Abschnitt einer Gruppe bleibt geöffnet'],
-            ['`popover` und `popovertarget`', 'Baseline seit Januar 2025', 'Nichtmodale Einblendungen ohne eigenen Toggle-Handler'],
-            ['`dialog.requestClose()`', 'Baseline seit Mai 2025', 'Schließanfragen zentral abfangen'],
-            ['`commandfor` und `command`', 'Baseline seit Dezember 2025', 'Dialoge deklarativ per Button steuern'],
-            ['`<dialog closedby="…">`', 'Eingeschränkt verfügbar', 'Schließen durch Escape oder Klick außerhalb konfigurieren'],
-            ['`inert`', 'Baseline April 2023, ältere Grundlage', 'Teilbereiche von Interaktion und Zugänglichkeit ausschließen'],
-            ['`<search>`', 'Baseline Oktober 2023', 'Suchbereiche semantisch auszeichnen'],
-            ['Deklaratives Shadow DOM', 'Baseline Februar 2024', 'Shadow DOM direkt aus HTML, etwa bei serverseitigem Rendering']
+            ['`<dialog>` und `showModal()`', 'Seit 2022 in allen großen Browsern, älteres Feature', 'Was ein echter modaler Dialog alles mitbringt'],
+            ['`<details name="…">`', 'Baseline 2024', 'In einer Gruppe ist höchstens ein Abschnitt offen'],
+            ['`popover` und `popovertarget`', 'Baseline seit Januar 2025', 'Einblendungen, die die Seite nicht sperren, ohne eigenen Toggle-Handler'],
+            ['`dialog.requestClose()`', 'Baseline seit Mai 2025', 'Schließen an einer Stelle abfangen und notfalls verhindern'],
+            ['`commandfor` und `command`', 'Baseline seit Dezember 2025', 'Dialoge per Button-Attribut steuern, ohne JavaScript'],
+            ['`<dialog closedby="…">`', 'Noch nicht überall verfügbar', 'Festlegen, ob Escape oder ein Klick daneben den Dialog schließt'],
+            ['`inert`', 'Baseline April 2023, älteres Feature', 'Teile der Seite für Bedienung und Screenreader sperren'],
+            ['`<search>`', 'Baseline Oktober 2023', 'Suchbereiche semantisch kennzeichnen'],
+            ['Deklaratives Shadow DOM', 'Baseline Februar 2024', 'Shadow DOM direkt im HTML, etwa beim Rendern auf dem Server']
           ]
         },
         {
           type: 'p',
-          text: 'HTML wird als Living Standard gepflegt; jährliche Gesamtversionen wie ES2025 gibt es nicht. Wir unterscheiden die Existenz eines Features im Standard von seiner Verfügbarkeit in Browsern.'
+          text: 'HTML ist ein Living Standard, Jahresversionen wie ES2025 gibt es nicht. Dass ein Feature im Standard steht, heißt deshalb noch nicht, dass es die Browser schon können. Diesen Unterschied machen wir jeweils deutlich.'
         }
       ],
       sources: [
@@ -58,19 +58,19 @@
       ],
       notes: [
         'Recherche vom 26. Oktober 2026.',
-        'Schwerpunkt native Interaktion: Dialoge, Popovers und Akkordeons, für die wir bisher oft eigene Zustandsverwaltung und Event-Handler geschrieben haben.',
-        'Die Beispiele zeigen die Grundmechanik; Tastaturbedienung, Beschriftung und fachliches Verhalten in der Anwendung separat prüfen.',
-        'Einzelne Erweiterungen eines Elements können später verfügbar werden als das Element selbst.'
+        'Im Mittelpunkt steht, was der Browser an Interaktion mitbringt: Dialoge, Popovers und Akkordeons. Dafür haben wir bisher oft eigene Zustandsverwaltung und Event-Handler geschrieben.',
+        'Die Beispiele zeigen nur, wie es grundsätzlich funktioniert. Tastaturbedienung, Beschriftung und das Verhalten in unserer Anwendung müssen wir trotzdem selbst prüfen.',
+        'Manche Erweiterungen eines Elements kommen erst später in den Browsern an als das Element selbst.'
       ]
     },
 
     {
       id: 'html-dialog',
       topic: '`<dialog>` · `showModal()`',
-      kicker: 'HTML · Demo 1 · Native Interaktion',
-      title: 'Ein nativer modaler Dialog',
+      kicker: 'HTML · Demo 1 · Eingebaute Interaktion',
+      title: 'Ein modaler Dialog, den der Browser mitbringt',
       status: 'grundlage',
-      since: 'Browserübergreifend seit 2022',
+      since: 'Seit 2022 in allen großen Browsern',
       minutes: 2,
       blocks: [
         {
@@ -81,12 +81,12 @@
               {
                 type: 'list',
                 items: [
-                  'Overlay-Element und Darstellung selbst bauen',
-                  'Fokus in das Modal setzen und darin halten',
-                  'Escape-Taste selbst behandeln',
+                  'Overlay selbst bauen und gestalten',
+                  'Fokus ins Modal setzen und dort festhalten',
+                  'Escape-Taste selbst abfangen',
                   'Hintergrund für Maus, Tastatur und Screenreader sperren',
-                  'Fokus beim Schließen zurückgeben',
-                  'Stapelreihenfolge mit `z-index` absichern'
+                  'Beim Schließen den Fokus zurücksetzen',
+                  'Mit `z-index` sicherstellen, dass das Modal oben liegt'
                 ]
               }
             ]
@@ -124,35 +124,35 @@
         },
         {
           type: 'callout',
-          text: '`showModal()` platziert den Dialog im Top Layer und macht die übrige Seite inert. Nur `open` im Markup oder `show()` öffnet ihn **nichtmodal** – ein wesentlicher Unterschied.'
+          text: '`showModal()` legt den Dialog in den Top Layer und sperrt den Rest der Seite. Wichtig: Mit dem Attribut `open` oder mit `show()` öffnet er sich dagegen **nicht modal**.'
         }
       ],
       support: {
-        text: 'Browserübergreifend seit 2022.',
+        text: 'Seit 2022 in allen großen Browsern.',
         test: hasDialog
       },
       sources: [
         { label: 'WHATWG: dialog', url: 'https://html.spec.whatwg.org/dev/interactive-elements.html#the-dialog-element' }
       ],
       notes: [
-        'Öffnen, mit Tab navigieren, Escape drücken und erneut über „Fertig“ schließen.',
-        '`method="dialog"` schließt den Dialog beim Absenden, ohne Formulardaten an einen Server zu schicken. Der Buttonwert steht in `dialog.returnValue` – das ist kein Speichern von Einstellungen.',
-        'Den anfänglichen Fokus passend zum Inhalt wählen und einen sichtbaren Schließen-Button anbieten.'
+        'Öffnen, mit Tab herumspringen, Escape drücken, dann noch einmal öffnen und über „Fertig“ schließen.',
+        '`method="dialog"` schließt den Dialog beim Absenden, ohne etwas an einen Server zu schicken. Der Wert des Buttons landet in `dialog.returnValue`. Gespeichert wird dadurch aber nichts.',
+        'Überlegen, wo der Fokus beim Öffnen landen soll, und immer einen sichtbaren Schließen-Button anbieten.'
       ]
     },
 
     {
       id: 'html-invoker-commands',
       topic: '`commandfor` · `command`',
-      kicker: 'HTML · Demo 2 · Native Interaktion',
-      title: 'Den Öffnen-Handler durch HTML ersetzen',
+      kicker: 'HTML · Demo 2 · Eingebaute Interaktion',
+      title: 'Dialog öffnen ohne Klick-Handler',
       status: 'neu',
       since: 'Baseline seit 12. Dezember 2025',
       minutes: 2,
       blocks: [
         {
           type: 'lead',
-          text: 'Mit Invoker Commands sendet ein Button einen unterstützten Befehl direkt an ein Zielelement. `commandfor` verweist auf die ID, `command` benennt die Aktion.'
+          text: 'Mit Invoker Commands schickt ein Button einen Befehl direkt an ein anderes Element. `commandfor` nennt die ID des Ziels, `command` die Aktion.'
         },
         {
           type: 'compare',
@@ -190,11 +190,11 @@
         },
         {
           type: 'callout',
-          text: '`show-modal`, `close` und `request-close` sind eingebaute Dialogbefehle. Eigene Befehle mit `--` benötigen weiterhin eigene Logik. `type="button"` macht deutlich, dass der Button kein Formular absenden soll.'
+          text: 'Für Dialoge gibt es die eingebauten Befehle `show-modal`, `close` und `request-close`. Eigene Befehle beginnen mit `--`, für sie braucht es weiterhin eigenen Code. `type="button"` stellt klar, dass der Button kein Formular absendet.'
         }
       ],
       support: {
-        text: 'Baseline Newly available seit 12. Dezember 2025. Native Dialogunterstützung allein genügt nicht, um diese Attribute vorauszusetzen; Fallback: `showModal()` per JavaScript.',
+        text: 'Baseline Newly available seit 12. Dezember 2025. Ein Browser, der `<dialog>` kann, kennt diese Attribute nicht zwingend. Als Fallback `showModal()` per JavaScript aufrufen.',
         test: () => 'commandForElement' in HTMLButtonElement.prototype
       },
       sources: [
@@ -202,15 +202,15 @@
         { label: 'WebDX: Invoker Commands', url: 'https://web-platform-dx.github.io/web-features-explorer/features/invoker-commands/' }
       ],
       notes: [
-        'Zeigen, dass rechts kein JavaScript vorhanden ist. Dann den Dialog öffnen und schließen.',
-        'Für Popovers gibt es entsprechend `show-popover`, `hide-popover` und `toggle-popover`.'
+        'Zeigen, dass rechts kein JavaScript dabei ist. Dann den Dialog öffnen und schließen.',
+        'Für Popovers gibt es passend dazu `show-popover`, `hide-popover` und `toggle-popover`.'
       ]
     },
 
     {
       id: 'html-popover',
       topic: '`popover` · `popovertarget`',
-      kicker: 'HTML · Demo 3 · Native Interaktion',
+      kicker: 'HTML · Demo 3 · Eingebaute Interaktion',
       title: 'Ein Popover direkt im HTML',
       status: 'neu',
       since: 'Baseline seit 27. Januar 2025',
@@ -218,7 +218,7 @@
       blocks: [
         {
           type: 'lead',
-          text: 'Ein Popover eignet sich für ergänzende Informationen, bei denen die restliche Seite bedienbar bleiben soll. Das Attribut `popover` allein macht den Inhalt nicht modal.'
+          text: 'Ein Popover passt für Zusatzinformationen, bei denen der Rest der Seite bedienbar bleiben soll. Das Attribut `popover` macht den Inhalt also nicht modal.'
         },
         {
           type: 'demo', kind: 'web', height: 260,
@@ -249,11 +249,11 @@
         {
           type: 'callout',
           tone: 'warn',
-          text: '`popover` liefert nicht automatisch die Semantik oder Tastatursteuerung eines Menüs, einer Combobox oder eines Tooltips. Die Positionierung am Auslöser ist ein eigener Schritt, etwa mit CSS Anchor Positioning.'
+          text: 'Ein Popover ist nicht automatisch ein Menü, eine Combobox oder ein Tooltip: Semantik und Tastatursteuerung dafür fehlen. Auch die Position am Auslöser muss man selbst festlegen, etwa mit CSS Anchor Positioning.'
         }
       ],
       support: {
-        text: 'Baseline Newly available seit 27. Januar 2025. Frühere Angaben mit April 2024 wurden wegen eines Problems beim Schließen auf iOS korrigiert.',
+        text: 'Baseline Newly available seit 27. Januar 2025. Anfangs hieß es April 2024, das Datum wurde aber wegen eines Fehlers beim Schließen auf iOS korrigiert.',
         test: () => 'popover' in HTMLElement.prototype
       },
       sources: [
@@ -261,8 +261,8 @@
         { label: 'web.dev: korrigierte Baseline-Einordnung', url: 'https://web.dev/blog/popover-baseline' }
       ],
       notes: [
-        'Öffnen, außerhalb klicken und Escape ausprobieren. Das Auto-Popover erscheint im Top Layer und unterstützt Light Dismiss.',
-        'Für dieses Beispiel ist kein selbst geschriebener Toggle-Handler nötig.'
+        'Öffnen, dann daneben klicken oder Escape drücken. Das Auto-Popover liegt im Top Layer und schließt sich bei einem Klick daneben von selbst (Light Dismiss).',
+        'Einen eigenen Toggle-Handler braucht es dafür nicht.'
       ]
     },
 
@@ -281,16 +281,16 @@
                 type: 'table',
                 head: ['Frage', 'Modaler Dialog mit `showModal()`', 'Auto-Popover'],
                 rows: [
-                  ['Übrige Seite gesperrt?', 'Ja', 'Nein'],
-                  ['Typische Verwendung', 'Eine Entscheidung oder abgeschlossener Arbeitsschritt', 'Ergänzende Informationen, nichtmodale Einblendung'],
-                  ['Klick außerhalb schließt', 'Mit unterstütztem `closedby="any"`', 'Ja'],
-                  ['Escape schließt', 'Standardmäßig ja, sofern nicht verhindert', 'Ja'],
-                  ['Darstellung im Top Layer', 'Ja', 'Ja']
+                  ['Rest der Seite gesperrt?', 'Ja', 'Nein'],
+                  ['Typische Verwendung', 'Eine Entscheidung oder ein in sich geschlossener Arbeitsschritt', 'Zusatzinformationen, Einblendung ohne Sperre'],
+                  ['Klick daneben schließt', 'Mit `closedby="any"`, falls unterstützt', 'Ja'],
+                  ['Escape schließt', 'Ja, wenn es nicht verhindert wird', 'Ja'],
+                  ['Liegt im Top Layer', 'Ja', 'Ja']
                 ]
               },
               {
                 type: 'p',
-                text: 'Die Art des Elements allein definiert nicht die fachliche Interaktion. Ein nichtmodaler Dialog ist ebenfalls möglich.'
+                text: 'Welches Element man nimmt, legt das Verhalten nicht allein fest. Es gibt zum Beispiel auch nicht modale Dialoge.'
               }
             ],
             [
@@ -325,15 +325,15 @@
         }
       ],
       notes: [
-        'Für die Demo vergleichen wir ausdrücklich `showModal()` mit einem Auto-Popover.',
-        'Beim Dialog führt ein Klick außerhalb ohne `closedby` zu nichts – beim Popover schließt er.'
+        'Wir vergleichen hier bewusst einen Dialog mit `showModal()` und ein Auto-Popover.',
+        'Ohne `closedby` passiert beim Dialog nichts, wenn man daneben klickt. Das Popover schließt sich.'
       ]
     },
 
     {
       id: 'html-details-name',
       topic: '`<details name>`',
-      kicker: 'HTML · Demo 4 · Native Interaktion',
+      kicker: 'HTML · Demo 4 · Eingebaute Interaktion',
       title: 'Exklusive Akkordeons mit `details name`',
       status: 'neu',
       since: 'Baseline 2024',
@@ -341,7 +341,7 @@
       blocks: [
         {
           type: 'lead',
-          text: '`<details>` und `<summary>` sind etabliert. Neu ist die Möglichkeit, mehrere Einträge über denselben `name` zu einer exklusiven Gruppe zu verbinden – ohne JavaScript.'
+          text: '`<details>` und `<summary>` gibt es schon lange. Neu ist: Bekommen mehrere Einträge denselben `name`, ist immer nur einer davon offen. Ganz ohne JavaScript.'
         },
         {
           type: 'compare',
@@ -388,7 +388,7 @@
         }
       ],
       support: {
-        text: 'Baseline 2024. Die exklusive Darstellung bewusst wählen: Zum Vergleichen mehrerer Antworten kann gleichzeitiges Öffnen hilfreicher sein.',
+        text: 'Baseline 2024. Nicht überall sinnvoll: Wer mehrere Antworten vergleichen will, möchte sie vielleicht gleichzeitig offen haben.',
         test: () => 'name' in HTMLDetailsElement.prototype
       },
       sources: [
@@ -396,9 +396,9 @@
         { label: 'MDN: Exklusive Akkordeons', url: 'https://developer.mozilla.org/en-US/blog/html-details-exclusive-accordions/' }
       ],
       notes: [
-        'Rechts nacheinander die Einträge öffnen: Der bisherige schließt sich. Links bleiben mehrere offen.',
-        'Namen zwischen unabhängigen Akkordeons unterschiedlich wählen.',
-        'Im Originaldokument steht die Gruppe in einem `<section aria-labelledby>` mit Überschrift – für echte Seiten so übernehmen.'
+        'Rechts nacheinander die Einträge öffnen: Der vorige schließt sich jeweils. Links bleiben alle offen.',
+        'Zwei Akkordeons, die nichts miteinander zu tun haben, brauchen verschiedene Namen.',
+        'In der Rechercheunterlage steckt die Gruppe in einer `<section aria-labelledby>` mit Überschrift. Auf echten Seiten sollte man das auch so machen.'
       ]
     },
 
@@ -406,7 +406,7 @@
       id: 'html-closedby',
       topic: '`<dialog closedby>`',
       kicker: 'HTML · Reserve · Schließverhalten',
-      title: '`closedby` für Benutzeraktionen',
+      title: 'Mit `closedby` festlegen, was den Dialog schließt',
       status: 'eingeschraenkt',
       role: 'reserve',
       since: 'Chrome und Edge 134, Firefox 141',
@@ -420,14 +420,14 @@
                 type: 'table',
                 head: ['Wert', 'Verhalten'],
                 rows: [
-                  ['`any`', 'Light Dismiss sowie Schließanfragen der Plattform, etwa Escape'],
-                  ['`closerequest`', 'Schließanfragen der Plattform, kein Light Dismiss'],
-                  ['`none`', 'Keine dieser automatischen Benutzeraktionen; explizites Schließen bleibt möglich']
+                  ['`any`', 'Klick daneben (Light Dismiss) und die üblichen Wege wie Escape'],
+                  ['`closerequest`', 'Die üblichen Wege wie Escape, aber kein Klick daneben'],
+                  ['`none`', 'Nichts davon, nur Schließen per Button oder Code']
                 ]
               },
               {
                 type: 'p',
-                text: 'Ohne Attribut verhält sich ein modaler Dialog wie `closerequest`. Explizite Aktionen wie ein Schließen-Button, ein Dialogformular oder `close()` schließen weiterhin.'
+                text: 'Ohne das Attribut verhält sich ein modaler Dialog wie bei `closerequest`. Ein Schließen-Button, ein Formular mit `method="dialog"` oder `close()` funktionieren in jedem Fall.'
               }
             ],
             [
@@ -451,15 +451,15 @@
         }
       ],
       support: {
-        text: 'Stand 26. Oktober 2026: Chrome und Edge seit 134, Firefox seit 141; laut WebDX noch nicht in Safari. Der sichtbare Schließen-Button bleibt die Grundbedienung.',
+        text: 'Stand 26. Oktober 2026: Chrome und Edge seit 134, Firefox seit 141, Safari laut WebDX noch nicht. Ein sichtbarer Schließen-Button gehört deshalb immer dazu.',
         test: () => typeof HTMLDialogElement !== 'undefined' && 'closedBy' in HTMLDialogElement.prototype
       },
       sources: [
         { label: 'WebDX: dialog closedby', url: 'https://web-platform-dx.github.io/web-features-explorer/features/dialog-closedby/' }
       ],
       notes: [
-        '`any` und `closerequest` vergleichen: Wert im Editor ändern, dann außerhalb klicken.',
-        'Als Erweiterung mit eingeschränktem Support eingeplant.'
+        '`any` und `closerequest` vergleichen: Wert im Editor ändern, dann daneben klicken.',
+        'Als Zusatz gedacht, weil der Support noch eingeschränkt ist.'
       ]
     },
 
@@ -467,7 +467,7 @@
       id: 'html-request-close',
       topic: '`dialog.requestClose()`',
       kicker: 'HTML · Reserve · Schließverhalten',
-      title: '`requestClose()` für abbrechbare Schließanfragen',
+      title: 'Schließen verhindern mit `requestClose()`',
       status: 'neu',
       role: 'reserve',
       since: 'Baseline seit Mai 2025',
@@ -475,7 +475,7 @@
       blocks: [
         {
           type: 'lead',
-          text: '`requestClose()` löst zuerst ein `cancel`-Event aus. Die Anwendung kann das Schließen dort verhindern, etwa solange Änderungen ungespeichert sind. `close()` schließt unmittelbar.'
+          text: '`requestClose()` löst erst ein `cancel`-Event aus. Dort kann die Anwendung das Schließen verhindern, etwa wenn noch ungespeicherte Änderungen da sind. `close()` dagegen schließt sofort.'
         },
         {
           type: 'demo', kind: 'web', height: 330,
@@ -516,7 +516,7 @@
         },
         {
           type: 'p',
-          text: 'Deklarativ kann ein Button `command="request-close"` verwenden. `closedby="none"` verhindert nicht den expliziten Aufruf von `requestClose()`.'
+          text: 'Ohne JavaScript geht das mit einem Button und `command="request-close"`. Auch bei `closedby="none"` lässt sich `requestClose()` weiterhin direkt aufrufen.'
         }
       ],
       support: {
@@ -527,8 +527,8 @@
         { label: 'WebDX: requestClose', url: 'https://web-platform-dx.github.io/web-features-explorer/features/requestclose/' }
       ],
       notes: [
-        'Öffnen, „Abbrechen“ drücken: schließt. Erneut öffnen, etwas tippen, „Abbrechen“ oder Escape: Hinweis statt Schließen. „Verwerfen“ ruft `close()` auf.',
-        'Der Ausschnitt zeigt die Stelle für die Fachlogik, keine vollständige Rückfrage.'
+        'Öffnen und „Abbrechen“ drücken: Der Dialog schließt. Noch einmal öffnen, etwas tippen, dann „Abbrechen“ oder Escape: Jetzt erscheint ein Hinweis, und der Dialog bleibt offen. „Verwerfen“ ruft `close()` auf.',
+        'Das Beispiel zeigt nur, wo die eigene Logik hingehört. Eine richtige Rückfrage ist es noch nicht.'
       ]
     },
 
@@ -536,14 +536,14 @@
       id: 'html-customizable-select',
       topic: '`appearance: base-select`',
       kicker: 'HTML · Demo 5 · Formularfelder',
-      title: 'Ein natives `select` frei gestalten',
+      title: 'Ein echtes `select` frei gestalten',
       status: 'eingeschraenkt',
       since: 'Chrome und Edge 135, Safari 27',
       minutes: 2,
       blocks: [
         {
           type: 'lead',
-          text: 'Customizable Select verbindet zusätzliche Gestaltung mit einem echten Formularfeld. Mit `appearance: base-select` lassen sich der geschlossene Zustand und die Auswahlliste gestalten; `<selectedcontent>` zeigt den Inhalt der gewählten Option.'
+          text: 'Mit Customizable Select lässt sich ein echtes Formularfeld frei gestalten. `appearance: base-select` öffnet das geschlossene Feld und die aufgeklappte Liste für eigenes CSS. `<selectedcontent>` zeigt den Inhalt der gewählten Option an.'
         },
         {
           type: 'demo', kind: 'web', height: 330,
@@ -600,7 +600,7 @@
         }
       ],
       support: {
-        text: 'Stand Oktober 2026: Chrome und Edge seit 135, Safari seit 27; laut WebDX noch kein Firefox. Ohne Support bleibt eine gewöhnliche Auswahl mit den Texten der Optionen – Fallback bei reichhaltigem Optionsinhalt und in der Framework-Version prüfen.',
+        text: 'Stand Oktober 2026: Chrome und Edge seit 135, Safari seit 27, Firefox laut WebDX noch nicht. Ohne Support bleibt ein normales Auswahlfeld mit den Texten der Optionen. Wenn die Optionen mehr als Text enthalten oder ein Framework im Spiel ist, den Fallback genau prüfen.',
         test: () => CSS.supports('appearance', 'base-select')
       },
       sources: [
@@ -608,9 +608,9 @@
         { label: 'WebDX: Customizable Select', url: 'https://web-platform-dx.github.io/web-features-explorer/features/customizable-select/' }
       ],
       notes: [
-        'Zwischen nativer und angepasster Darstellung wechseln und die Auswahl per Tastatur ändern.',
-        'Der explizite `value` bestimmt weiterhin den Formularwert. Die Funktionalität von `select` wird nicht durch eine selbst gebaute Liste ersetzt.',
-        'Gegenüber dem Originaldokument sind die Selektoren mit `.custom` versehen, damit der Umschalter funktioniert.'
+        'Zwischen Standard- und angepasster Darstellung wechseln und die Auswahl auch per Tastatur ändern.',
+        'Der Formularwert kommt weiterhin aus `value`. Es bleibt ein echtes `select`, keine nachgebaute Liste.',
+        'Anders als in der Rechercheunterlage hängt vor den Selektoren `.custom`, damit der Umschalter funktioniert.'
       ]
     },
 
@@ -618,7 +618,7 @@
       id: 'html-plaintext-only',
       topic: '`contenteditable="plaintext-only"`',
       kicker: 'HTML · Demo 6 · Bearbeitbare Bereiche',
-      title: 'Text bearbeiten ohne eingefügte Formatierungen',
+      title: 'Einfügen ohne Formatierung',
       status: 'neu',
       role: 'zusatz',
       since: 'Baseline seit 4. März 2025',
@@ -626,7 +626,7 @@
       blocks: [
         {
           type: 'lead',
-          text: '`contenteditable="plaintext-only"` erlaubt das Bearbeiten des Textinhalts, ohne Rich-Text-Formatierungen beim Einfügen zu übernehmen.'
+          text: 'Mit `contenteditable="plaintext-only"` lässt sich Text bearbeiten, und beim Einfügen bleiben Fett, Kursiv, Links und andere Formatierungen draußen.'
         },
         {
           type: 'demo', kind: 'web', height: 330,
@@ -658,7 +658,7 @@
         },
         {
           type: 'callout',
-          text: 'Für gewöhnliche Formulare ist `textarea` meist passender: Ein Contenteditable-Bereich erhält nicht automatisch Formularübermittlung, Validierung oder Speicherfunktion.'
+          text: 'In normalen Formularen ist `textarea` meist die bessere Wahl. Ein `contenteditable`-Bereich wird nicht mit dem Formular abgeschickt, nicht validiert und nicht gespeichert.'
         }
       ],
       support: {
@@ -673,8 +673,8 @@
         { label: 'web.dev: plaintext-only ist Baseline', url: 'https://web.dev/blog/contenteditable-plaintext-only-baseline' }
       ],
       notes: [
-        'Den gelben Absatz kopieren und in beide Bereiche einfügen. Im zweiten Bereich bleibt nur der Text.',
-        'Der Mehrwert liegt bei gezielt gestalteten bearbeitbaren Oberflächen.'
+        'Den gelben Absatz kopieren und in beide Felder einfügen. Im zweiten kommt nur der reine Text an.',
+        'Interessant ist das vor allem für eigene Bearbeitungsoberflächen, bei denen ein `textarea` nicht reicht.'
       ]
     },
 
@@ -682,7 +682,7 @@
       id: 'html-hidden-until-found',
       topic: '`hidden="until-found"`',
       kicker: 'HTML · Demo 7 · Auffindbarer Inhalt',
-      title: 'Verborgenen Text über die Browsersuche finden',
+      title: 'Versteckten Text mit der Browsersuche finden',
       status: ['grundlage', 'eingeschraenkt'],
       role: 'zusatz',
       since: 'Chromium seit 2022, Firefox 148',
@@ -690,7 +690,7 @@
       blocks: [
         {
           type: 'lead',
-          text: '`hidden="until-found"` verbirgt einen Bereich, lässt dessen Text aber für die Browsersuche und Fragmentnavigation auffindbar.'
+          text: '`hidden="until-found"` versteckt einen Bereich, aber die Suche im Browser und Sprungmarken (`#anker`) finden ihn trotzdem und klappen ihn auf.'
         },
         {
           type: 'demo', kind: 'web', height: 260,
@@ -711,11 +711,11 @@
         {
           type: 'callout',
           tone: 'warn',
-          text: 'Die Funktion versteckt Darstellung, keine vertraulichen Daten. Zusätzliches `display: none` würde den Suchmechanismus verhindern. Für produktive Inhalte einen expliziten Weg zum Aufdecken vorsehen; der Fragmentlink allein ist kein universeller Fallback.'
+          text: 'Der Text ist nur unsichtbar, nicht geschützt. Vertrauliches gehört hier nicht hinein. Ein zusätzliches `display: none` würde die Suche aushebeln. Auf echten Seiten immer auch einen Button oder Link zum Aufklappen anbieten, ein Sprunglink allein funktioniert nicht überall.'
         }
       ],
       support: {
-        text: 'In Chromium seit 2022, Firefox seit 148 (2026); laut WebDX noch nicht in Safari. Browser ohne Support behandeln den Bereich wie gewöhnlich verborgen.',
+        text: 'In Chromium seit 2022, Firefox seit 148 (2026), Safari laut WebDX noch nicht. Browser ohne Support behandeln den Bereich wie ein normales `hidden`.',
         test: () => 'onbeforematch' in HTMLElement.prototype
       },
       sources: [
@@ -723,8 +723,8 @@
         { label: 'WebDX: hidden until found', url: 'https://web-platform-dx.github.io/web-features-explorer/features/hidden-until-found/' }
       ],
       notes: [
-        'In das Ergebnis klicken, „Auf Seite suchen“ öffnen (Strg/⌘ + F) und nach „Nordlicht“ suchen. Der Bereich wird aufgedeckt.',
-        'Danach „Zurücksetzen“ und den Fragmentlink ausprobieren.'
+        'In das Ergebnis klicken, die Seitensuche öffnen (Strg/⌘ + F) und nach „Nordlicht“ suchen. Der Bereich klappt auf.',
+        'Danach „Zurücksetzen“ und den Sprunglink ausprobieren.'
       ]
     },
 
@@ -740,26 +740,26 @@
       blocks: [
         {
           type: 'lead',
-          text: 'Ein experimenteller Vorschlag, mit dem der Browser DOM-Inhalte in Canvas zeichnen kann – etwa HTML-Bedienelemente auf Flächen einer 3D-Szene.'
+          text: 'Ein experimenteller Vorschlag: Der Browser soll HTML-Inhalte in ein Canvas zeichnen können, etwa Bedienelemente auf die Flächen einer 3D-Szene.'
         },
         {
           type: 'list',
           items: [
-            'Es geht um die Verbindung von DOM und Canvas-Rendering, nicht um einen gewöhnlichen HTML-Container.',
-            'Die API wurde mehrfach verändert. Neuere Beispiele verwenden `content="drawable"` und `drawable` statt des älteren `layoutsubtree`.',
-            'Beispielcode immer auf die verwendete Browserversion abstimmen.'
+            'Es geht darum, DOM und Canvas zusammenzubringen. Ein neuer Container für HTML ist es nicht.',
+            'Die API hat sich schon mehrmals geändert. Neuere Beispiele nutzen `content="drawable"` und `drawable` statt des älteren `layoutsubtree`.',
+            'Beispielcode muss deshalb immer zur Browserversion passen.'
           ]
         },
         {
           type: 'callout',
           title: 'Bereits im Einsatz: [Canvas UI](https://canvasui.dev/)',
-          text: 'Komponentenbibliothek von David Haz (React Bits). Die Komponenten zeichnen echtes, weiterhin bedienbares HTML per HTML-in-Canvas in eine Canvas und legen WebGL-Effekte darüber, etwa Glas, Flüssigkeit oder Partikel. Texte, Links und Formulare bleiben im DOM. Ohne Unterstützung fallen die Effekte auf ein einfaches GPU-Overlay oder den unveränderten Inhalt zurück. Quellcode auf [GitHub](https://github.com/DavidHDev/canvas-ui), Lizenz MIT mit Commons Clause.'
+          text: 'Eine Komponentenbibliothek von David Haz (React Bits). Sie zeichnet echtes, bedienbares HTML mit HTML-in-Canvas in ein Canvas und legt WebGL-Effekte darüber, etwa Glas, Flüssigkeit oder Partikel. Texte, Links und Formulare bleiben dabei im DOM. Kann der Browser das nicht, gibt es ein einfaches GPU-Overlay oder den Inhalt ohne Effekt. Quellcode auf [GitHub](https://github.com/DavidHDev/canvas-ui), Lizenz MIT mit Commons Clause.'
         },
         {
           type: 'callout',
           tone: 'exp',
           title: 'Keine lokale Demo',
-          text: 'Für die Vorführung eine offizielle Demo oder die Beispiele von Canvas UI in einer vorbereiteten Testumgebung verwenden und das Feature deutlich als Experiment kennzeichnen. Eine lokale Browserdemo ist bewusst nicht eingerichtet.'
+          text: 'Für die Vorführung eine offizielle Demo oder die Beispiele von Canvas UI in einer vorbereiteten Umgebung zeigen und klar sagen, dass es ein Experiment ist. Eine eigene Demo in dieser Präsentation gibt es absichtlich nicht.'
         }
       ],
       sources: [
@@ -770,54 +770,54 @@
         { label: 'InfoQ: Canvas UI', url: 'https://www.infoq.com/news/2026/09/canvas-ui-webgl/' }
       ],
       notes: [
-        '1 bis 2 Minuten als experimenteller Abschluss der erweiterten Fassung.',
-        'Origin Trial läuft laut aktueller Ankündigung bis einschließlich Chrome 160 (Stand 29. September 2026). Ältere Artikel nennen noch Chrome 148 bis 150 – das war der ursprüngliche Zeitraum vor der Verlängerung.',
-        'Canvas UI zeigt, wofür das gedacht ist: Effekte über echtem HTML statt über einem Screenshot. Die volle Darstellung braucht Chrome mit Origin-Trial-Token oder dem Flag `canvas-draw-element`; Safari und Firefox unterstützen die API nicht.',
-        'Canvas UI verteilt Quellcode über eine shadcn-artige Registry statt als npm-Paket; Wrapper gibt es für React, Vue, Svelte, Solid und Vanilla TypeScript.'
+        '1 bis 2 Minuten als Ausblick am Ende der langen Fassung.',
+        'Der Origin Trial läuft laut aktueller Ankündigung bis einschließlich Chrome 160 (Stand 29. September 2026). Ältere Artikel nennen noch Chrome 148 bis 150, das war der ursprüngliche Zeitraum vor der Verlängerung.',
+        'Canvas UI zeigt gut, wofür das gedacht ist: Effekte über echtem HTML statt über einem Screenshot davon. Alles sieht man nur in Chrome mit Origin-Trial-Token oder dem Flag `canvas-draw-element`. Safari und Firefox können die API nicht.',
+        'Canvas UI kommt nicht als npm-Paket, sondern wie bei shadcn über eine Registry, aus der man den Quellcode übernimmt. Wrapper gibt es für React, Vue, Svelte, Solid und reines TypeScript.'
       ]
     },
 
     {
       id: 'html-weitere',
       kicker: 'HTML · Für Rückfragen',
-      title: 'Weitere Entwicklungen zum Nachlesen',
+      title: 'Was es sonst noch gibt',
       role: 'zusatz',
       blocks: [
         {
           type: 'table',
-          head: ['Thema', 'Konkreter Nutzen', 'Einordnung'],
+          head: ['Thema', 'Wofür', 'Stand'],
           rows: [
-            ['Deklaratives Shadow DOM', 'Shadow Root samt Styles direkt im HTML, etwa für serverseitig gerenderte Web Components', 'Baseline 2024 · [web.dev](https://web.dev/articles/declarative-shadow-dom)'],
-            ['Scoped Custom Element Registries', 'Gleichnamige Custom Elements verschiedener Bibliotheken getrennt registrieren', 'Uneinheitlicher Support · [Chrome](https://developer.chrome.com/blog/scoped-registries), [WebDX](https://web-platform-dx.github.io/web-features-explorer/features/scoped-custom-element-registries/)'],
-            ['Interest Invokers mit `interestfor`', 'Hover, Fokus oder langes Drücken als Auslöser für Einblendungen', 'Nur Chromium · [WebDX](https://web-platform-dx.github.io/web-features-explorer/features/interest-invokers/)'],
-            ['`fetchpriority`', 'Relative Ladepriorität wichtiger Ressourcen beeinflussen', 'Baseline seit Oktober 2024; ein Hinweis, keine feste Reihenfolge · [web.dev](https://web.dev/articles/fetch-priority)'],
-            ['Speculation Rules', 'Wahrscheinliche Folgeseiten vorladen oder vorrendern', 'Chromium; Effekte vorab messen · [Chrome](https://developer.chrome.com/docs/web-platform/implementing-speculation-rules)']
+            ['Deklaratives Shadow DOM', 'Shadow Root samt Styles direkt im HTML, etwa für Web Components, die auf dem Server gerendert werden', 'Baseline 2024 · [web.dev](https://web.dev/articles/declarative-shadow-dom)'],
+            ['Scoped Custom Element Registries', 'Custom Elements mit gleichem Namen aus verschiedenen Bibliotheken nebeneinander nutzen', 'Unterschiedlich unterstützt · [Chrome](https://developer.chrome.com/blog/scoped-registries), [WebDX](https://web-platform-dx.github.io/web-features-explorer/features/scoped-custom-element-registries/)'],
+            ['Interest Invokers mit `interestfor`', 'Einblendungen bei Hover, Fokus oder langem Drücken', 'Nur Chromium · [WebDX](https://web-platform-dx.github.io/web-features-explorer/features/interest-invokers/)'],
+            ['`fetchpriority`', 'Dem Browser sagen, welche Ressourcen er zuerst laden soll', 'Baseline seit Oktober 2024; nur ein Hinweis an den Browser, keine Garantie · [web.dev](https://web.dev/articles/fetch-priority)'],
+            ['Speculation Rules', 'Seiten, die als Nächstes wahrscheinlich aufgerufen werden, vorab laden oder rendern', 'Nur Chromium; Wirkung vorher messen · [Chrome](https://developer.chrome.com/docs/web-platform/implementing-speculation-rules)']
           ]
         },
         {
           type: 'h',
-          text: 'Ergänzende Themen'
+          text: 'Außerdem'
         },
         {
           type: 'list',
           items: [
-            '`inert` sperrt einen Teilbaum für Interaktion und entfernt ihn aus der Zugänglichkeitsdarstellung – ohne ihn visuell auszublenden. Bei `showModal()` übernimmt der Browser das bereits.',
-            '`<search>` zeichnet einen Such- oder Filterbereich semantisch aus. Die Suche selbst implementiert es nicht.',
-            'Deklaratives Shadow DOM über `<template shadowrootmode="open">`.',
-            'CSS `::backdrop`, `@starting-style`, diskrete Übergänge und Anchor Positioning verbinden HTML und CSS – Gestaltungsmöglichkeiten getrennt vom HTML-Basissupport prüfen.'
+            '`inert` sperrt einen Teil der Seite für Bedienung und Screenreader, er bleibt aber sichtbar. Bei `showModal()` macht der Browser das automatisch mit dem Rest der Seite.',
+            '`<search>` kennzeichnet einen Such- oder Filterbereich. Suchen muss man trotzdem selbst.',
+            'Deklaratives Shadow DOM schreibt man als `<template shadowrootmode="open">`.',
+            'Mit `::backdrop`, `@starting-style`, diskreten Übergängen und Anchor Positioning gestaltet man diese Elemente per CSS. Ob der Browser das kann, ist eine eigene Frage, unabhängig vom HTML-Element selbst.'
           ]
         }
       ],
       notes: [
-        'Diese Themen sind eine Auswahl, kein vollständiges Änderungsprotokoll.',
-        'Für ein Team ohne Web Components sind Scoped Registries eher Hintergrundwissen. Ladeprioritäten und Speculation Rules brauchen eine vorbereitete Messung.'
+        'Das ist eine Auswahl, keine vollständige Liste aller Änderungen.',
+        'Solange wir keine Web Components bauen, sind Scoped Registries eher Hintergrundwissen. Ladepriorität und Speculation Rules nur mit vorbereiteter Messung zeigen.'
       ]
     },
 
     {
       id: 'html-support',
       kicker: 'HTML · Support und Ablauf',
-      title: 'Supportchecks und Auswahl',
+      title: 'Support prüfen und Demos auswählen',
       role: 'einordnung',
       blocks: [
         {
@@ -838,20 +838,20 @@
           head: ['Kurze Fassung · 8 bis 10 Min.', 'Erweiterte Fassung · 14 bis 17 Min.'],
           rows: [
             ['Dialog und deklarative Buttons', 'Dialog und deklarative Buttons'],
-            ['Popover als nichtmodale Alternative', 'Popover und exklusives Akkordeon'],
+            ['Popover als Alternative ohne Sperre', 'Popover und exklusives Akkordeon'],
             ['Exklusives Akkordeon', 'Customizable Select'],
-            ['Ein Zusatzbeispiel nach Teaminteresse', 'Plaintext Only und Hidden Until Found'],
-            ['Kurze Supporteinordnung', 'HTML-in-Canvas als experimenteller Abschluss']
+            ['Ein Zusatzbeispiel, je nach Interesse', 'Plaintext Only und Hidden Until Found'],
+            ['Kurz zum Browsersupport', 'HTML-in-Canvas als Ausblick zum Schluss']
           ]
         },
         {
           type: 'p',
-          text: 'Die Prüfungen zeigen verfügbare API-Oberflächen; sie ersetzen keine Verhaltenstests. Dialoge und Popovers mit Maus, Tab, Enter und Escape testen.'
+          text: 'Die Prüfungen zeigen nur, ob es die API gibt, nicht, ob sie sich richtig verhält. Dialoge und Popovers deshalb immer auch mit Maus, Tab, Enter und Escape ausprobieren.'
         }
       ],
       notes: [
-        '`closedby` und `requestClose()` bleiben Reserve für Fragen zum Schließverhalten.',
-        'Die passende Auswahl hängt von den Anwendungen des Teams ab.'
+        '`closedby` und `requestClose()` halten wir in Reserve, falls Fragen zum Schließen kommen.',
+        'Was davon wir zeigen, hängt davon ab, woran das Team gerade arbeitet.'
       ]
     }
   ]);
