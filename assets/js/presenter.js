@@ -30,6 +30,8 @@
     document.body.dataset.chapter = slide.chapter;
 
     $('#current-kicker').innerHTML = render.md(slide.kicker ?? render.chapterLabel(slide.chapter));
+    $('#current-topic').innerHTML = slide.topic ? render.md(slide.topic) : '';
+    $('#current-topic').hidden = !slide.topic;
     $('#current-title').innerHTML = render.md(slide.title);
     $('#current-badges').replaceChildren(render.badges(slide, { live: false }));
     $('#current-notes').replaceChildren(render.notes(slide));

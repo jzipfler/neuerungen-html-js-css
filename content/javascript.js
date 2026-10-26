@@ -46,6 +46,7 @@
 
     {
       id: 'js-at',
+      topic: '`Array.prototype.at()`',
       kicker: 'JavaScript · Demo 1 · Relative Indizes',
       title: 'Das letzte Element mit `.at()` lesen',
       status: 'grundlage',
@@ -115,6 +116,7 @@
 
     {
       id: 'js-groupby',
+      topic: '`Object.groupBy()` · `Map.groupBy()`',
       kicker: 'JavaScript · Demo 2 · Daten gruppieren',
       title: 'Gruppieren ohne eigene Sammellogik',
       status: 'neu',
@@ -189,6 +191,7 @@
 
     {
       id: 'js-set-methods',
+      topic: '`intersection()` · `difference()` · `union()`',
       kicker: 'JavaScript · Demo 3 · Mengen vergleichen',
       title: 'Überschneidungen mit Sets',
       status: 'neu',
@@ -250,6 +253,7 @@
 
     {
       id: 'js-iterator-helpers',
+      topic: 'Iterator Helpers · `filter()` · `take()` · `toArray()`',
       kicker: 'JavaScript · Demo 4 · Iteratoren',
       title: 'Iteratoren verarbeiten nur benötigte Werte',
       status: 'neu',
@@ -322,6 +326,7 @@
 
     {
       id: 'js-regexp-escape',
+      topic: '`RegExp.escape()`',
       kicker: 'JavaScript · Reserve',
       title: 'Text als literales RegExp-Muster verwenden',
       status: 'neu',
@@ -381,6 +386,7 @@
 
     {
       id: 'js-upsert',
+      topic: '`Map.prototype.getOrInsertComputed()`',
       kicker: 'JavaScript · Optional · ES2026',
       title: 'Map-Werte bei Bedarf anlegen',
       status: ['neu', 'eingeschraenkt'],

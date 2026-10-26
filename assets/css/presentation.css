@@ -368,6 +368,27 @@ button { font: inherit; color: inherit; }
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
+/* Das eigentliche Feature einer Folie, groß und auf einen Blick erkennbar */
+.topic {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.15em 0.5em;
+  margin: 0.15rem 0 0.6rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--surface);
+  font-family: var(--mono);
+  font-size: clamp(1.15rem, 0.9rem + 1vw, 1.7rem);
+  font-weight: 700;
+  line-height: 1.3;
+}
+.topic code {
+  all: unset;
+  font: inherit;
+}
+
 .slide-title {
   margin: 0;
   font-size: clamp(1.55rem, 1rem + 1.6vw, 2.45rem);
@@ -716,6 +737,14 @@ button.card:hover { border-color: var(--accent); }
 .overview-item:hover { border-color: var(--accent); }
 .overview-item[aria-current="true"] { border-color: var(--focus); box-shadow: inset 4px 0 0 var(--focus); }
 .overview-title { display: block; font-size: 0.85rem; font-weight: 600; }
+.overview-topic {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.overview-topic code { all: unset; }
 .overview-item .badges { margin-top: 0.3rem; gap: 0.25rem; }
 .overview-item .badge,
 .overview-item .chip { font-size: 0.65rem; padding: 0.05rem 0.45rem; }

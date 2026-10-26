@@ -61,6 +61,7 @@
 
     {
       id: 'css-has',
+      topic: '`:has()`',
       kicker: 'CSS · Demo 1 · Zustände ohne zusätzlichen Code',
       title: 'Das Elternelement reagiert auf den Inhalt',
       status: 'neu',
@@ -132,6 +133,7 @@
 
     {
       id: 'css-text-wrap',
+      topic: '`text-wrap: balance`',
       kicker: 'CSS · Zusatzbeispiel · Text',
       title: 'Überschriften gleichmäßiger umbrechen',
       status: 'neu',
@@ -181,6 +183,7 @@
 
     {
       id: 'css-light-dark',
+      topic: '`light-dark()`',
       kicker: 'CSS · Zusatzbeispiel · Farbschemata',
       title: 'Zwei Farbschemata mit `light-dark()`',
       status: 'neu',
@@ -254,6 +257,7 @@
 
     {
       id: 'css-view-transitions',
+      topic: '`document.startViewTransition()`',
       kicker: 'CSS · Zusatzbeispiel · Übergänge',
       title: 'Einen DOM-Wechsel animieren',
       status: 'neu',
@@ -322,6 +326,7 @@
 
     {
       id: 'css-container-queries',
+      topic: '`@container`',
       kicker: 'CSS · Container',
       title: 'Container Size Queries',
       status: 'grundlage',
@@ -371,6 +376,7 @@
 
     {
       id: 'css-container-units',
+      topic: '`cqi` · `cqw` · `cqh`',
       kicker: 'CSS · Demo 2 · Containergrößen in Werten',
       title: 'Schrift und Abstände mit dem Container skalieren',
       status: 'grundlage',
@@ -450,6 +456,7 @@
 
     {
       id: 'css-nesting',
+      topic: 'Natives Nesting `&`',
       kicker: 'CSS · Reserve',
       title: 'Natives Nesting',
       status: 'grundlage',
@@ -503,6 +510,7 @@
 
     {
       id: 'css-sibling-index',
+      topic: '`sibling-index()` · `sibling-count()`',
       kicker: 'CSS · Demo 3 · Wiederholungen',
       title: 'Gestaffelte Animationen mit Positionsfunktionen',
       status: 'neu',
@@ -578,6 +586,7 @@
 
     {
       id: 'css-counter',
+      topic: '`counter()`',
       kicker: 'CSS · Demo 4 · Nummerierung',
       title: 'Abschnitte automatisch nummerieren',
       status: 'grundlage',
@@ -623,6 +632,7 @@
 
     {
       id: 'css-progress',
+      topic: '`progress()`',
       kicker: 'CSS · Demo 5 · Fortschritt berechnen',
       title: 'Einen Wert mit `progress()` normieren',
       status: 'neu',
@@ -685,6 +695,7 @@
 
     {
       id: 'css-scroll-timeline',
+      topic: '`animation-timeline: scroll()`',
       kicker: 'CSS · Demo 6 · Fortschritt darstellen',
       title: 'Scrollfortschritt ohne eigenen Scroll-Handler',
       status: 'eingeschraenkt',
@@ -764,6 +775,7 @@
 
     {
       id: 'css-function',
+      topic: '`@function`',
       kicker: 'CSS · Demo 7 · Ausblick',
       title: 'Wiederverwendbare Berechnungen mit `@function`',
       status: 'experimentell',

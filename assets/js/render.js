@@ -192,6 +192,7 @@
     const head = el('header', 'slide-head');
     const kicker = data.kicker ?? chapterLabel(data.chapter);
     if (kicker) head.append(el('p', 'kicker', md(kicker)));
+    if (data.topic) head.append(el('p', 'topic', md(data.topic)));
     head.append(el('h1', 'slide-title', md(data.title)));
     const badgeRow = badges(data);
     if (badgeRow.childElementCount) head.append(badgeRow);

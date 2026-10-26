@@ -153,6 +153,7 @@
         const title = document.createElement('span');
         title.className = 'overview-title';
         title.innerHTML = render.md(slide.title);
+        if (slide.topic) button.append(render.el('span', 'overview-topic', render.md(slide.topic)));
         button.append(title, render.badges(slide, { live: false }));
         button.addEventListener('click', () => {
           dialog.close();

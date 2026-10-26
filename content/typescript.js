@@ -51,6 +51,7 @@
 
     {
       id: 'ts-satisfies',
+      topic: '`satisfies`',
       kicker: 'TypeScript · Demo 1 · Typen mit weniger Hilfscode',
       title: '`satisfies` prüft eine Konfiguration',
       status: 'grundlage',
@@ -128,6 +129,7 @@
 
     {
       id: 'ts-const-type-parameter',
+      topic: '`<const T>` · const-Typparameter',
       kicker: 'TypeScript · Demo 2 · Typen mit weniger Hilfscode',
       title: '`const`-Typparameter erhalten Literaltypen',
       status: 'grundlage',
@@ -209,6 +211,7 @@
 
     {
       id: 'ts-type-predicates',
+      topic: 'Inferred Type Predicates',
       kicker: 'TypeScript · Demo 3 · Typen mit weniger Hilfscode',
       title: '`filter` leitet den Ergebnistyp ab',
       status: 'neu',
@@ -271,6 +274,7 @@
 
     {
       id: 'ts-truthy-checks',
+      topic: 'Prüfung immer wahrer Bedingungen',
       kicker: 'TypeScript · Demo 4 · Frühere Fehlermeldungen',
       title: 'Der Compiler entdeckt eine vergessene Methode',
       status: 'neu',
@@ -339,6 +343,7 @@
 
     {
       id: 'ts-noinfer',
+      topic: '`NoInfer<T>`',
       kicker: 'TypeScript · Reserve',
       title: '`NoInfer` begrenzt die Inferenz',
       status: 'neu',
@@ -396,6 +401,7 @@
 
     {
       id: 'ts-closure-narrowing',
+      topic: 'Narrowing in Closures',
       kicker: 'TypeScript · Reserve',
       title: 'Narrowing bleibt im Callback erhalten',
       status: 'neu',
@@ -438,6 +444,7 @@
 
     {
       id: 'ts-6-7',
+      topic: 'TypeScript 6.0 · 7.0',
       kicker: 'TypeScript · Aktueller Compiler',
       title: 'TypeScript 6 und 7 einordnen',
       status: 'neu',
@@ -487,6 +494,7 @@
 
     {
       id: 'ts-performance',
+      topic: '`tsc --extendedDiagnostics`',
       kicker: 'TypeScript · Optional',
       title: 'Performance-Vergleich am eigenen Projekt',
       role: 'optional',

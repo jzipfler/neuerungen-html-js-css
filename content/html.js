@@ -66,6 +66,7 @@
 
     {
       id: 'html-dialog',
+      topic: '`<dialog>` · `showModal()`',
       kicker: 'HTML · Demo 1 · Native Interaktion',
       title: 'Ein nativer modaler Dialog',
       status: 'grundlage',
@@ -142,6 +143,7 @@
 
     {
       id: 'html-invoker-commands',
+      topic: '`commandfor` · `command`',
       kicker: 'HTML · Demo 2 · Native Interaktion',
       title: 'Den Öffnen-Handler durch HTML ersetzen',
       status: 'neu',
@@ -207,6 +209,7 @@
 
     {
       id: 'html-popover',
+      topic: '`popover` · `popovertarget`',
       kicker: 'HTML · Demo 3 · Native Interaktion',
       title: 'Ein Popover direkt im HTML',
       status: 'neu',
@@ -265,6 +268,7 @@
 
     {
       id: 'html-dialog-vs-popover',
+      topic: '`showModal()` vs. `popover`',
       kicker: 'HTML · Demo 3 · Vergleich',
       title: 'Dialog oder Popover?',
       minutes: 1,
@@ -328,6 +332,7 @@
 
     {
       id: 'html-details-name',
+      topic: '`<details name>`',
       kicker: 'HTML · Demo 4 · Native Interaktion',
       title: 'Exklusive Akkordeons mit `details name`',
       status: 'neu',
@@ -399,6 +404,7 @@
 
     {
       id: 'html-closedby',
+      topic: '`<dialog closedby>`',
       kicker: 'HTML · Reserve · Schließverhalten',
       title: '`closedby` für Benutzeraktionen',
       status: 'eingeschraenkt',
@@ -459,6 +465,7 @@
 
     {
       id: 'html-request-close',
+      topic: '`dialog.requestClose()`',
       kicker: 'HTML · Reserve · Schließverhalten',
       title: '`requestClose()` für abbrechbare Schließanfragen',
       status: 'neu',
@@ -527,6 +534,7 @@
 
     {
       id: 'html-customizable-select',
+      topic: '`appearance: base-select`',
       kicker: 'HTML · Demo 5 · Formularfelder',
       title: 'Ein natives `select` frei gestalten',
       status: 'eingeschraenkt',
@@ -608,6 +616,7 @@
 
     {
       id: 'html-plaintext-only',
+      topic: '`contenteditable="plaintext-only"`',
       kicker: 'HTML · Demo 6 · Bearbeitbare Bereiche',
       title: 'Text bearbeiten ohne eingefügte Formatierungen',
       status: 'neu',
@@ -671,6 +680,7 @@
 
     {
       id: 'html-hidden-until-found',
+      topic: '`hidden="until-found"`',
       kicker: 'HTML · Demo 7 · Auffindbarer Inhalt',
       title: 'Verborgenen Text über die Browsersuche finden',
       status: ['grundlage', 'eingeschraenkt'],
@@ -720,6 +730,7 @@
 
     {
       id: 'html-in-canvas',
+      topic: 'HTML-in-Canvas',
       kicker: 'HTML · Ausblick',
       title: 'HTML in Canvas',
       status: 'experimentell',
