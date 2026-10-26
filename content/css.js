@@ -259,7 +259,7 @@
       id: 'css-view-transitions',
       topic: '`document.startViewTransition()`',
       kicker: 'CSS · Zusatzbeispiel · Übergänge',
-      title: 'Einen DOM-Wechsel animieren',
+      title: 'Zwischen zwei Ansichten animieren',
       status: 'neu',
       role: 'zusatz',
       since: 'Baseline 2025 (same-document)',
@@ -267,45 +267,125 @@
       blocks: [
         {
           type: 'lead',
-          text: 'Same-document View Transitions sind eine Web-API mit CSS-Pseudoelementen. Der Browser erfasst den Zustand vor und nach der Aktualisierung und animiert dazwischen.'
+          text: '„Same-document“ heißt: Es gibt keinen echten Seitenwechsel. Eine Single-Page-App tauscht per JavaScript den Inhalt aus – etwa von der Liste zur Detailansicht. View Transitions animieren genau diesen Austausch.'
         },
         {
-          type: 'demo', kind: 'web', height: 300,
+          type: 'columns',
+          cols: [
+            [
+              {
+                type: 'list',
+                ordered: true,
+                items: [
+                  '**Vorher:** Der Browser hält ein Bild der alten Ansicht fest.',
+                  '**Update:** Im Callback von `startViewTransition()` tauscht unser Code den DOM aus.',
+                  '**Nachher:** Der Browser blendet von alt nach neu über.',
+                  'Elemente mit **gleichem** `view-transition-name` in alter und neuer Ansicht gelten als dasselbe Element und wandern von ihrer alten an die neue Position.'
+                ]
+              }
+            ],
+            [
+              {
+                type: 'callout',
+                title: 'Abgrenzung',
+                text: 'Echte Seitenwechsel zwischen zwei HTML-Dokumenten (Multi-Page-App) sind **cross-document** View Transitions. Sie werden per CSS mit `@view-transition` aktiviert und haben einen eigenen Supportstand.'
+              }
+            ]
+          ]
+        },
+        {
+          type: 'demo', kind: 'web', height: 380,
           html: d`
-            <button id="toggle">Ansicht wechseln</button>
-            <main id="panel">Listenansicht</main>
+            <label><input type="checkbox" id="use-vt" checked> View Transition verwenden</label>
+            <label><input type="checkbox" id="slow"> Zeitlupe</label>
+            <main id="app"></main>
           `,
           css: d`
-            #panel {
-              margin-top: 1rem;
-              padding: 1rem;
+            /* Die angeklickte Karte trägt in Liste und Detailansicht denselben
+               view-transition-name (per JS gesetzt) und wandert deshalb mit. */
+            .card {
+              box-sizing: border-box;
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+              margin-bottom: 0.5rem;
+              padding: 0.75rem 1rem;
+              border: 0;
               border-radius: 0.5rem;
               background: #e0e7ff;
-              /* Optional: eigener Name für den Übergang */
-              view-transition-name: panel;
+              text-align: left;
             }
-            #panel.grid {
-              width: 10rem;
-              height: 8rem;
-              margin-left: auto;
-              background: #fde68a;
+            .card.large {
+              flex-direction: column;
+              padding: 1.5rem;
+              background: #c7d2fe;
+              font-size: 1.4rem;
+            }
+
+            /* Nur für die Demo: Übergang verlangsamen */
+            html.slow::view-transition-group(*),
+            html.slow::view-transition-old(*),
+            html.slow::view-transition-new(*) {
+              animation-duration: 2s;
             }
           `,
           js: d`
-            const button = document.querySelector("#toggle");
-            const panel = document.querySelector("#panel");
-            let grid = false;
+            const tickets = [
+              { id: 1, title: "Login reparieren", status: "Offen", text: "Nach dem Update schlägt die Anmeldung fehl." },
+              { id: 2, title: "Export beschleunigen", status: "In Arbeit", text: "Große Exporte dauern über eine Minute." },
+              { id: 3, title: "Suche verbessern", status: "Erledigt", text: "Treffer werden nach Relevanz sortiert." }
+            ];
+            const app = document.querySelector("#app");
 
-            button.onclick = () => {
-              const update = () => {
-                grid = !grid;
-                panel.textContent = grid ? "Kachelansicht" : "Listenansicht";
-                panel.classList.toggle("grid", grid);
-              };
-              if (matchMedia("(prefers-reduced-motion: reduce)").matches ||
-                  !document.startViewTransition) update();
-              else document.startViewTransition(update);
-            };
+            function card(ticket, tag) {
+              const node = document.createElement(tag);
+              node.className = "card";
+              node.style.viewTransitionName = "ticket-" + ticket.id;
+              node.innerHTML = "<b>" + ticket.title + "</b><span>" + ticket.status + "</span>";
+              return node;
+            }
+
+            function listView() {
+              const view = document.createElement("section");
+              view.innerHTML = "<h2>Ansicht 1: Ticketliste</h2>";
+              for (const ticket of tickets) {
+                const item = card(ticket, "button");
+                item.onclick = () => show(() => detailView(ticket));
+                view.append(item);
+              }
+              return view;
+            }
+
+            function detailView(ticket) {
+              const view = document.createElement("section");
+              view.innerHTML = "<h2>Ansicht 2: Ticketdetails</h2>";
+              const head = card(ticket, "div");
+              head.classList.add("large");
+              const text = document.createElement("p");
+              text.textContent = ticket.text;
+              const back = document.createElement("button");
+              back.textContent = "← Zurück zur Liste";
+              back.onclick = () => show(listView);
+              view.append(head, text, back);
+              return view;
+            }
+
+            // Der eigentliche Wechsel: alten Inhalt durch neuen ersetzen
+            function show(createView) {
+              const update = () => app.replaceChildren(createView());
+              const animate = document.querySelector("#use-vt").checked &&
+                document.startViewTransition &&
+                !matchMedia("(prefers-reduced-motion: reduce)").matches;
+              if (!animate) return update();
+              // Bei schnellem Doppelklick überspringt der Browser den Übergang
+              document.startViewTransition(update).ready.catch(() => {});
+            }
+
+            document.querySelector("#slow").onchange = event =>
+              document.documentElement.classList.toggle("slow", event.target.checked);
+
+            // Startansicht ohne Übergang
+            app.replaceChildren(listView());
           `
         }
       ],
@@ -317,8 +397,10 @@
         { label: 'Chrome: Same-document View Transitions', url: 'https://developer.chrome.com/docs/web-platform/view-transitions/same-document' }
       ],
       notes: [
-        'Button anklicken. Schon ohne `view-transition-name` zeigt der Standardübergang einen Effekt; mit Namen wird das Panel als eigenes Element animiert.',
-        'Die Zeile `view-transition-name` auskommentieren und vergleichen.',
+        'Erst mit „View Transition verwenden“ aus ein Ticket öffnen: Die Ansicht springt hart um. Dann mit Übergang: Die Karte wandert in den Detailkopf, der Rest blendet über.',
+        '„Zeitlupe“ einschalten, um die drei Schritte sichtbar zu machen: altes Bild, DOM-Austausch, Animation.',
+        'Wichtig: Es ist immer dasselbe Dokument. Der Inhalt von `#app` wird ausgetauscht – so wie bei einem Routenwechsel in einer Single-Page-App.',
+        'Für echte Seitenwechsel zwischen HTML-Dokumenten gibt es cross-document View Transitions mit `@view-transition` – eigener Supportstand.',
         'DOM-Aktualisierungen bleiben JavaScript. Bei reduzierter Bewegung wird der Übergang übersprungen.',
         'Diese Präsentation nutzt View Transitions selbst beim Folienwechsel.'
       ]
