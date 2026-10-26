@@ -370,10 +370,9 @@ button { font: inherit; color: inherit; }
 }
 /* Das eigentliche Feature einer Folie, groß und auf einen Blick erkennbar */
 .topic {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.15em 0.5em;
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
   margin: 0.15rem 0 0.6rem;
   padding: 0.3rem 0.9rem;
   border-radius: 8px;
