@@ -752,19 +752,28 @@
         },
         {
           type: 'callout',
+          title: 'Bereits im Einsatz: [Canvas UI](https://canvasui.dev/)',
+          text: 'Komponentenbibliothek von David Haz (React Bits). Die Komponenten zeichnen echtes, weiterhin bedienbares HTML per HTML-in-Canvas in eine Canvas und legen WebGL-Effekte darüber, etwa Glas, Flüssigkeit oder Partikel. Texte, Links und Formulare bleiben im DOM. Ohne Unterstützung fallen die Effekte auf ein einfaches GPU-Overlay oder den unveränderten Inhalt zurück. Quellcode auf [GitHub](https://github.com/DavidHDev/canvas-ui), Lizenz MIT mit Commons Clause.'
+        },
+        {
+          type: 'callout',
           tone: 'exp',
           title: 'Keine lokale Demo',
-          text: 'Für die Vorführung eine offizielle Demo in einer vorbereiteten Testumgebung verwenden und das Feature deutlich als Experiment kennzeichnen. Eine lokale Browserdemo ist bewusst nicht eingerichtet.'
+          text: 'Für die Vorführung eine offizielle Demo oder die Beispiele von Canvas UI in einer vorbereiteten Testumgebung verwenden und das Feature deutlich als Experiment kennzeichnen. Eine lokale Browserdemo ist bewusst nicht eingerichtet.'
         }
       ],
       sources: [
         { label: 'WICG: html-in-canvas', url: 'https://github.com/WICG/html-in-canvas' },
         { label: 'Chrome: Origin Trial', url: 'https://developer.chrome.com/blog/html-in-canvas-origin-trial' },
-        { label: 'Chrome: API-Änderungen', url: 'https://developer.chrome.com/blog/html-in-canvas-ot-changes' }
+        { label: 'Chrome: API-Änderungen', url: 'https://developer.chrome.com/blog/html-in-canvas-ot-changes' },
+        { label: 'Canvas UI', url: 'https://canvasui.dev/' },
+        { label: 'InfoQ: Canvas UI', url: 'https://www.infoq.com/news/2026/09/canvas-ui-webgl/' }
       ],
       notes: [
         '1 bis 2 Minuten als experimenteller Abschluss der erweiterten Fassung.',
-        'Origin Trial läuft laut aktueller Ankündigung bis einschließlich Chrome 160.'
+        'Origin Trial läuft laut aktueller Ankündigung bis einschließlich Chrome 160 (Stand 29. September 2026). Ältere Artikel nennen noch Chrome 148 bis 150 – das war der ursprüngliche Zeitraum vor der Verlängerung.',
+        'Canvas UI zeigt, wofür das gedacht ist: Effekte über echtem HTML statt über einem Screenshot. Die volle Darstellung braucht Chrome mit Origin-Trial-Token oder dem Flag `canvas-draw-element`; Safari und Firefox unterstützen die API nicht.',
+        'Canvas UI verteilt Quellcode über eine shadcn-artige Registry statt als npm-Paket; Wrapper gibt es für React, Vue, Svelte, Solid und Vanilla TypeScript.'
       ]
     },
 
