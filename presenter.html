@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Referentenansicht</title>
+  <link rel="stylesheet" href="assets/css/presentation.css">
+  <link rel="stylesheet" href="assets/css/presenter.css">
+</head>
+<body class="presenter" data-chapter="start">
+  <header class="topbar">
+    <strong>Referentenansicht</strong>
+    <span class="presenter-status muted"></span>
+    <div class="tools">
+      <button type="button" data-nav="prev" title="Vorherige Folie (←)">← Zurück</button>
+      <button type="button" data-nav="next" title="Nächste Folie (→)">Weiter →</button>
+    </div>
+  </header>
+
+  <main class="presenter-grid">
+    <section class="presenter-current" aria-labelledby="current-title">
+      <p class="kicker" id="current-kicker"></p>
+      <h1 id="current-title" class="slide-title"></h1>
+      <div id="current-badges"></div>
+      <h2 class="presenter-label">Notizen</h2>
+      <div id="current-notes" class="presenter-notes"></div>
+      <div id="current-sources" class="slide-foot"></div>
+    </section>
+
+    <aside class="presenter-side">
+      <section class="presenter-timer" aria-label="Zeit">
+        <div>
+          <span class="presenter-label">Laufzeit</span>
+          <span id="elapsed" class="presenter-time">00:00</span>
+        </div>
+        <div>
+          <span class="presenter-label">Uhrzeit</span>
+          <span id="clock" class="presenter-time"></span>
+        </div>
+        <button type="button" class="btn" id="timer-reset">Laufzeit zurücksetzen</button>
+      </section>
+      <section>
+        <h2 class="presenter-label">Als Nächstes</h2>
+        <p id="next-title" class="presenter-next"></p>
+      </section>
+      <section>
+        <h2 class="presenter-label">Folien im Kapitel</h2>
+        <ol id="chapter-list" class="presenter-list"></ol>
+      </section>
+    </aside>
+  </main>
+
+  <script src="assets/js/deck.js"></script>
+  <script src="content/start.js"></script>
+  <script src="content/typescript.js"></script>
+  <script src="content/javascript.js"></script>
+  <script src="content/css.js"></script>
+  <script src="content/html.js"></script>
+  <script src="content/ende.js"></script>
+  <script src="assets/js/render.js"></script>
+  <script src="assets/js/presenter.js"></script>
+</body>
+</html>

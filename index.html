@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neuerungen im Web</title>
+  <meta name="description" content="Interaktive Präsentation zu Neuerungen in TypeScript, JavaScript, CSS und HTML, Oktober 2023 bis Oktober 2026">
+  <link rel="stylesheet" href="assets/css/presentation.css">
+</head>
+<body data-chapter="start">
+  <a class="skip-link" href="#slide">Zur Folie springen</a>
+
+  <header class="topbar">
+    <button type="button" class="brand" data-action="home" title="Zur ersten Folie">
+      Neuerungen <span>2023–2026</span>
+    </button>
+    <nav class="chapters" aria-label="Kapitel"></nav>
+    <div class="tools">
+      <button type="button" data-action="overview" title="Übersicht und Kapitelwahl (O)">Übersicht</button>
+      <button type="button" data-action="notes" aria-pressed="false" title="Sprechernotizen (N)">Notizen</button>
+      <button type="button" data-action="mainonly" aria-pressed="false" title="Reserve und Zusatzbeispiele ausblenden (R)">Nur Hauptablauf</button>
+      <button type="button" data-action="presenter" title="Referentenansicht in neuem Fenster (P)">Referent</button>
+      <button type="button" data-action="theme">◐</button>
+      <button type="button" data-action="help" title="Tastatursteuerung (?)" aria-label="Tastatursteuerung">?</button>
+    </div>
+  </header>
+
+  <main id="slide" class="slide" tabindex="-1"></main>
+
+  <aside id="notes" class="notes" aria-label="Sprechernotizen" hidden>
+    <div class="notes-head">
+      <strong>Sprechernotizen</strong>
+      <span class="notes-meta"></span>
+    </div>
+    <div class="notes-body"></div>
+  </aside>
+
+  <footer class="bottombar">
+    <button type="button" data-action="prev" aria-label="Vorherige Folie">←</button>
+    <div class="progress" aria-hidden="true"><div class="progress-bar"></div></div>
+    <span class="counter"></span>
+    <button type="button" data-action="next" aria-label="Nächste Folie">→</button>
+  </footer>
+
+  <div id="announce" class="visually-hidden" aria-live="polite"></div>
+
+  <dialog id="overview" class="sheet" aria-labelledby="overview-title">
+    <div class="sheet-head">
+      <h2 id="overview-title">Übersicht und Kapitelwahl</h2>
+      <form method="dialog"><button class="btn btn-quiet" aria-label="Übersicht schließen">Schließen</button></form>
+    </div>
+    <p class="overview-mode muted"></p>
+    <div class="overview-body"></div>
+  </dialog>
+
+  <dialog id="help" class="sheet sheet-narrow" aria-labelledby="help-title">
+    <div class="sheet-head">
+      <h2 id="help-title">Tastatursteuerung</h2>
+      <form method="dialog"><button class="btn btn-quiet" aria-label="Hilfe schließen">Schließen</button></form>
+    </div>
+    <dl class="help-keys"></dl>
+    <p class="muted">Nach einem Klick in ein Demo-Ergebnis liegt der Fokus im iframe. Für die Folien­navigation einmal außerhalb klicken.</p>
+  </dialog>
+
+  <script src="assets/js/deck.js"></script>
+  <script src="content/start.js"></script>
+  <script src="content/typescript.js"></script>
+  <script src="content/javascript.js"></script>
+  <script src="content/css.js"></script>
+  <script src="content/html.js"></script>
+  <script src="content/ende.js"></script>
+  <script src="assets/js/highlight.js"></script>
+  <script src="assets/js/playground.js"></script>
+  <script src="assets/js/demo.js"></script>
+  <script src="assets/js/render.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
