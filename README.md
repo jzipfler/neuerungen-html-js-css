@@ -2,12 +2,12 @@
 
 Interaktive Präsentation für eine Team-Session. Schwerpunkt: Oktober 2023 bis Oktober 2026, ergänzt um ausgewählte ältere Grundlagen.
 
-Die vier Markdown-Dokumente im Hauptverzeichnis bilden die Inhaltsbasis:
+Die vier Markdown-Dokumente im Ordner [`unterlagen/`](unterlagen/) bilden die Inhaltsbasis:
 
-- [TypeScript_Neuerungen.md](TypeScript_Neuerungen.md)
-- [JavaScript_Neuerungen.md](JavaScript_Neuerungen.md)
-- [CSS_Neuerungen.md](CSS_Neuerungen.md)
-- [HTML_Neuerungen.md](HTML_Neuerungen.md)
+- [TypeScript_Neuerungen.md](unterlagen/TypeScript_Neuerungen.md)
+- [JavaScript_Neuerungen.md](unterlagen/JavaScript_Neuerungen.md)
+- [CSS_Neuerungen.md](unterlagen/CSS_Neuerungen.md)
+- [HTML_Neuerungen.md](unterlagen/HTML_Neuerungen.md)
 
 ## Starten
 
@@ -58,6 +58,7 @@ assets/js/playground.js  Links in den TypeScript Playground
 assets/js/app.js         Navigation, Tastatur, Übersicht, Notizen
 assets/js/presenter.js   Referentenansicht
 content/*.js             Folieninhalte je Kapitel
+unterlagen/*.md          Recherche-Dokumente als Inhaltsbasis
 ```
 
 Alle Skripte sind klassische Skripte ohne Module, damit `index.html` auch direkt aus dem Dateisystem läuft.
