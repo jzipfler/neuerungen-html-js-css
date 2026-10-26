@@ -12,18 +12,19 @@
   --border: #d3d9e3;
   --focus: #2563eb;
 
-  --code-bg: #f7f9fc;
-  --code-fg: #1f2937;
-  --t-comment: #6b7280;
-  --t-string: #047857;
-  --t-keyword: #7c3aed;
-  --t-number: #b45309;
-  --t-fn: #1d4ed8;
-  --t-type: #0e7490;
-  --t-tag: #be123c;
-  --t-attr: #9333ea;
-  --t-prop: #1d4ed8;
-  --t-at: #be123c;
+  /* Code steht in beiden Farbschemata auf dunklem Grund, damit er sich vom Text abhebt */
+  --code-bg: #0f172a;
+  --code-fg: #e2e8f0;
+  --t-comment: #8b95a7;
+  --t-string: #86efac;
+  --t-keyword: #c4b5fd;
+  --t-number: #fdba74;
+  --t-fn: #93c5fd;
+  --t-type: #67e8f9;
+  --t-tag: #fda4af;
+  --t-attr: #d8b4fe;
+  --t-prop: #93c5fd;
+  --t-at: #fda4af;
 
   --new-bg: #dcfce7;   --new-fg: #166534;
   --base-bg: #e0e7ff;  --base-fg: #3730a3;
@@ -59,7 +60,7 @@
     --muted: #9ba6ba;
     --border: #2a3654;
     --focus: #60a5fa;
-    --code-bg: #0d1526;
+    --code-bg: #1a2440;
     --code-fg: #e2e8f0;
     --t-comment: #8b95a7;
     --t-string: #86efac;
@@ -98,7 +99,7 @@
   --muted: #9ba6ba;
   --border: #2a3654;
   --focus: #60a5fa;
-  --code-bg: #0d1526;
+  --code-bg: #1a2440;
   --code-fg: #e2e8f0;
   --t-comment: #8b95a7;
   --t-string: #86efac;
@@ -161,9 +162,12 @@ a { color: var(--focus); }
 code {
   font-family: var(--mono);
   font-size: 0.88em;
-  background: var(--surface-2);
+  font-weight: 600;
+  color: color-mix(in srgb, var(--accent) 80%, var(--fg));
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
   border-radius: 4px;
-  padding: 0.08em 0.32em;
+  padding: 0.02em 0.32em;
 }
 kbd {
   font-family: var(--mono);
@@ -224,7 +228,6 @@ button { font: inherit; color: inherit; }
   border-color: var(--accent);
   color: var(--surface);
 }
-[data-chapter="js"] .tools button[aria-pressed="true"] { color: #111827; }
 
 /* ==========================================================================
    Kopf- und Fußleiste
@@ -546,6 +549,20 @@ button.card:hover { border-color: var(--accent); }
 .demo.stack { grid-template-columns: minmax(0, 1fr); }
 .demo-code,
 .demo-result { display: flex; flex-direction: column; gap: 0.6rem; min-width: 0; }
+
+/* Codeflächen sind immer dunkel: eigene Farben für Rahmen, Text und Meldungen */
+.editor,
+.console {
+  --fg: var(--code-fg);
+  --muted: #94a3b8;
+  --border: #2c3a57;
+  --focus: #60a5fa;
+  --before: #fbbf24;
+  --missing: #f87171;
+  --ok: #4ade80;
+  color: var(--code-fg);
+  box-shadow: 0 1px 2px rgb(15 23 42 / 0.12), 0 4px 14px rgb(15 23 42 / 0.12);
+}
 
 .editor {
   border: 1px solid var(--border);
